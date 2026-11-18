@@ -4,13 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Moonlit Clock</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -21,10 +18,10 @@ body {
 
 .banner {
   width: 100%;
-  min-height: 165px;
+  min-height: 145px;
   position: relative;
   overflow: hidden;
-  padding: 17px 28px;
+  padding: 12px 22px 8px;
   border: 1px solid #756e53;
   border-radius: 13px;
   background: linear-gradient(110deg,#19231f,#292722);
@@ -47,10 +44,10 @@ body {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 0.95fr 110px 1.8fr;
+  grid-template-columns: 0.95fr 110px 2.3fr;
   align-items: center;
-  gap: 24px;
-  min-height: 130px;
+  gap: 20px;
+  min-height: 112px;
 }
 
 /* CLOCK */
@@ -64,7 +61,7 @@ body {
 }
 
 .time {
-  font-size: clamp(42px,4.3vw,58px);
+  font-size: clamp(46px,4.6vw,63px);
   letter-spacing: 5px;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
@@ -114,36 +111,55 @@ body {
 .vocab {
   border-left: 1px solid #a89b7044;
   padding-left: 25px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 155px;
+  column-gap: 22px;
+  align-items: start;
   min-width: 0;
 }
 
 .word {
-  font-size: clamp(25px,2.3vw,32px);
+  grid-column: 1 / -1;
+  font-size: clamp(27px,2.5vw,35px);
   color: #f2dfb4;
   font-weight: bold;
-  margin-bottom: 7px;
-  line-height: 1.2;
+  margin-bottom: 5px;
+  line-height: 1.15;
 }
 
 .word-meta {
+  grid-column: 1 / -1;
   font-family: Arial,sans-serif;
-  font-size: 11px;
-  margin-bottom: 8px;
+  font-size: 12px;
+  margin-bottom: 7px;
   color: #b8c5a2;
 }
 
 .meaning {
-  font-size: 15px;
-  line-height: 1.5;
-  margin-bottom: 8px;
+  grid-column: 1;
+  font-size: 16px;
+  line-height: 1.45;
+  margin-bottom: 5px;
   color: #eee6d2;
 }
 
-.detail {
-  font-size: 12px;
-  line-height: 1.5;
-  color: #b8c5a2;
-  margin-top: 5px;
+#mnemonic,
+#example {
+  grid-column: 1;
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
+#hindi {
+  grid-column: 2;
+  grid-row: 3 / span 3;
+  align-self: center;
+  border-left: 1px solid #a89b7044;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d8c99f;
 }
 
 .detail b {
@@ -160,11 +176,12 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  margin-top: 10px;
-  padding-top: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
   border-top: 1px solid #ffffff13;
   font-family: Arial,sans-serif;
-  font-size: 12px;
+  font-size: 13px;
+  min-height: 22px;
 }
 
 .country {
@@ -173,10 +190,11 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #a6aa91;
+  font-size: 12px;
+  color: #b8c5a2;
 }
 
-/* WORD NAVIGATION */
+/* NAVIGATION */
 
 .controls {
   display: flex;
@@ -223,7 +241,7 @@ body {
 
 @media(max-width:700px) {
   .banner {
-    padding: 12px 13px;
+    padding: 12px 13px 8px;
     min-height: unset;
   }
 
@@ -265,39 +283,53 @@ body {
     border-left: none;
     border-top: 1px solid #a89b7044;
     padding: 12px 0 0;
+    grid-template-columns: 1fr;
   }
 
-  .word {
-    font-size: 21px;
+  .word,
+  .word-meta,
+  .meaning,
+  #mnemonic,
+  #example,
+  #hindi {
+    grid-column: 1;
+    grid-row: auto;
   }
 
-  .meaning {
-    font-size: 12px;
-  }
+  .word { font-size: 21px; }
+  .meaning { font-size: 12px; }
 
-  .detail {
+  #mnemonic,
+  #example,
+  #hindi {
     font-size: 10px;
+  }
+
+  #hindi {
+    border-left: none;
+    padding-left: 0;
   }
 
   .bottom {
     flex-wrap: wrap;
     gap: 8px;
-    font-size: 8px;
-  }
-
-  .controls {
-    justify-content: flex-end;
+    margin-top: 5px;
+    padding-top: 5px;
   }
 
   .country {
     flex-basis: 100%;
+    font-size: 9px;
+  }
+
+  .controls {
+    justify-content: flex-end;
   }
 }
 </style>
 </head>
 
 <body>
-
 <div class="banner">
 
   <div class="stars" aria-hidden="true">
@@ -317,16 +349,15 @@ body {
 
   <div class="layout">
 
-    <!-- LEFT: CLOCK -->
+    <!-- CLOCK -->
     <div class="clock-section">
       <div class="time" id="time">00:00:00</div>
       <div class="date" id="date">Loading date</div>
     </div>
 
-    <!-- CENTRE: MOON / SUN -->
+    <!-- MOON / SUN -->
     <div class="celestial" id="celestial">
 
-      <!-- Pixel moon -->
       <svg class="moon-art" viewBox="0 0 64 64">
         <circle cx="32" cy="32" r="23" fill="#f2df9e"/>
         <g fill="#d6bd7c">
@@ -343,7 +374,6 @@ body {
         </g>
       </svg>
 
-      <!-- Pixel sun -->
       <svg class="sun-art" viewBox="0 0 64 64">
         <path fill="#d8a85c" d="
           M30 2h4v10h-4z
@@ -363,7 +393,7 @@ body {
 
     </div>
 
-    <!-- RIGHT: VOCABULARY -->
+    <!-- VOCABULARY -->
     <div class="vocab">
 
       <div class="word" id="word">1 – Epiphany</div>
@@ -389,10 +419,9 @@ body {
       </div>
 
     </div>
-
   </div>
 
-  <!-- COUNTRY FACT + WORD NAVIGATION -->
+  <!-- COUNTRY FACT + NAVIGATION -->
   <div class="bottom">
 
     <div class="country" id="country">
@@ -408,12 +437,11 @@ body {
     </div>
 
   </div>
-
 </div>
 
 <script>
 
-/* CLOCK */
+/* CLOCK: INDIA TIME */
 
 const zone = "Asia/Kolkata";
 
@@ -443,14 +471,14 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-/* DAY / NIGHT ICON */
+/* MOON AT NIGHT, SUN DURING THE DAY */
 
 const celestial = document.getElementById("celestial");
 
 function updateCelestial() {
   const hour = Number(
     new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Asia/Kolkata",
+      timeZone: zone,
       hour: "2-digit",
       hourCycle: "h23"
     }).format(new Date())
@@ -471,11 +499,10 @@ setInterval(updateCelestial, 60000);
 
 /* VOCABULARY COLLECTION
    Format:
-   word, pronunciation, meaning, mnemonic, example, Hindi equivalent
+   [word, pronunciation, meaning, mnemonic, example, Hindi]
 */
 
 const words = [
-
 ["Epiphany","/ɪˈpɪfəni/ · noun","A sudden, profound realisation or moment of clarity.","Imagine a light suddenly switching on in your mind.","The passage led me to an epiphany about human ambition.","बोध · अचानक हुई गहरी अनुभूति"],
 ["Epistemology","/ɪˌpɪstəˈmɒlədʒi/ · noun","The branch of philosophy concerned with knowledge and how we know things.","Episteme = knowledge; -ology = study.","The author questions the epistemology behind scientific certainty.","ज्ञानमीमांसा"],
 ["Paradigm","/ˈpærədaɪm/ · noun","A model, framework or typical way of understanding something.","Think of it as the lens through which you see the world.","The discovery caused a paradigm shift in medical research.","प्रतिमान · सोचने का ढाँचा"],
@@ -485,22 +512,22 @@ const words = [
 ["Ambivalent","/æmˈbɪvələnt/ · adjective","Having mixed or conflicting feelings about something.","Ambi = both; valence = feeling.","She remained ambivalent about accepting the offer.","दुविधाग्रस्त"],
 ["Altruistic","/ˌæltruˈɪstɪk/ · adjective","Showing selfless concern for others.","Helping others without expecting a return.","His altruistic actions benefited the entire community.","परोपकारी"],
 ["Apathetic","/ˌæpəˈθetɪk/ · adjective","Showing little interest, enthusiasm or concern.","A = without; pathos = feeling.","Voters became apathetic towards the repeated political promises.","उदासीन"],
-["Empirical","/ɪmˈpɪrɪkəl/ · adjective","Based on observation, experience or evidence rather than theory alone.","Evidence you can observe or test.","The claim requires empirical evidence.","अनुभवजन्य · प्रमाण आधारित"],
-["Dichotomy","/daɪˈkɒtəmi/ · noun","A division into two contrasting or opposing parts.","Di = two; think of two opposite sides.","The essay challenges the dichotomy between nature and culture.","द्वैत · दो भागों में विभाजन"],
+["Empirical","/ɪmˈpɪrɪkəl/ · adjective","Based on observation, experience or evidence rather than theory alone.","Evidence you can observe or test.","The claim requires empirical evidence.","अनुभवजन्य"],
+["Dichotomy","/daɪˈkɒtəmi/ · noun","A division into two contrasting or opposing parts.","Di = two; think of two opposite sides.","The essay challenges the dichotomy between nature and culture.","द्वैत"],
 ["Paradox","/ˈpærədɒks/ · noun","A statement or situation that seems contradictory but may reveal a truth.","An apparent contradiction with a hidden insight.","It is a paradox that greater connectivity can produce loneliness.","विरोधाभास"],
 ["Conjecture","/kənˈdʒektʃə/ · noun","An opinion or conclusion based on incomplete information.","A guess that still needs proof.","Without sufficient evidence, the theory remains conjecture.","अनुमान"],
-["Inference","/ˈɪnfərəns/ · noun","A conclusion reached from evidence and reasoning.","Read between the lines.","The reader can draw an inference from the author's final paragraph.","निष्कर्ष · अनुमान"],
+["Inference","/ˈɪnfərəns/ · noun","A conclusion reached from evidence and reasoning.","Read between the lines.","The reader can draw an inference from the author's final paragraph.","निष्कर्ष"],
 ["Premise","/ˈpremɪs/ · noun","A proposition or assumption on which an argument is based.","The foundation of an argument.","The entire argument rests on a questionable premise.","आधारभूत धारणा"],
 ["Fallacy","/ˈfæləsi/ · noun","A mistaken belief or error in reasoning.","A false logic trap.","The author exposes the fallacy in assuming correlation means causation.","तर्कदोष"],
 ["Rhetoric","/ˈretərɪk/ · noun","The art of persuasive or effective speaking and writing.","Words designed to persuade.","His rhetoric was powerful, but his argument lacked evidence.","वाक्पटुता"],
-["Implicit","/ɪmˈplɪsɪt/ · adjective","Suggested or understood without being directly stated.","It is inside the message, not explicitly written.","There is an implicit criticism of consumer culture in the passage.","निहित · अप्रत्यक्ष"],
-["Explicit","/ɪkˈsplɪsɪt/ · adjective","Stated clearly and directly.","Expressed openly.","The author makes an explicit distinction between the two theories.","स्पष्ट · प्रत्यक्ष"],
+["Implicit","/ɪmˈplɪsɪt/ · adjective","Suggested or understood without being directly stated.","It is inside the message, not explicitly written.","There is an implicit criticism of consumer culture in the passage.","निहित"],
+["Explicit","/ɪkˈsplɪsɪt/ · adjective","Stated clearly and directly.","Expressed openly.","The author makes an explicit distinction between the two theories.","स्पष्ट"],
 ["Scrutinise","/ˈskruːtɪnaɪz/ · verb","To examine something very carefully and critically.","A scrutiny lens that checks every detail.","Researchers must scrutinise the data before drawing conclusions.","बारीकी से जाँचना"],
 ["Substantiate","/səbˈstænʃieɪt/ · verb","To support a claim with evidence.","Give substance to an argument.","The researcher could not substantiate the allegation.","प्रमाणित करना"],
 ["Undermine","/ˌʌndəˈmaɪn/ · verb","To weaken or damage gradually.","Imagine removing the foundation beneath a building.","The new evidence undermines the author's central claim.","कमज़ोर करना"],
 ["Reconcile","/ˈrekənsaɪl/ · verb","To make two conflicting ideas or situations compatible.","Bring opposing sides together.","The philosopher attempts to reconcile freedom with social responsibility.","मेल कराना"],
 ["Coherent","/kəʊˈhɪərənt/ · adjective","Logical, consistent and easy to understand.","Ideas that hold together.","The essay presents a coherent argument from beginning to end.","सुसंगत"],
-["Ambiguous","/æmˈbɪɡjuəs/ · adjective","Having more than one possible meaning or interpretation.","An ambiguous sentence has multiple readings.","The wording of the question was deliberately ambiguous.","अस्पष्ट · द्विअर्थी"],
+["Ambiguous","/æmˈbɪɡjuəs/ · adjective","Having more than one possible meaning or interpretation.","An ambiguous sentence has multiple readings.","The wording of the question was deliberately ambiguous.","अस्पष्ट"],
 ["Arbitrary","/ˈɑːbɪtrəri/ · adjective","Based on random choice or personal preference rather than reason.","A decision without a fair rule.","The division appears arbitrary rather than scientifically justified.","मनमाना"],
 ["Dogmatic","/dɒɡˈmætɪk/ · adjective","Insisting that beliefs are unquestionably correct.","Refusing to consider alternatives.","The author criticises dogmatic approaches to education.","हठधर्मी"],
 ["Sceptical","/ˈskeptɪkəl/ · adjective","Not easily convinced; inclined to question claims.","A healthy 'show me the evidence' attitude.","Readers should remain sceptical of sweeping generalisations.","संदेहशील"],
@@ -509,7 +536,7 @@ const words = [
 ["Eloquent","/ˈeləkwənt/ · adjective","Fluent, persuasive and expressive in speech or writing.","Words that flow with impact.","Her eloquent response changed the tone of the debate.","वाक्पटु"],
 ["Articulate","/ɑːˈtɪkjələt/ · adjective/verb","Able to express ideas clearly.","Put your thoughts into clear words.","He articulated a complex idea in simple language.","स्पष्ट रूप से व्यक्त करना"],
 ["Meticulous","/məˈtɪkjələs/ · adjective","Extremely careful and attentive to detail.","A person who notices even tiny details.","The editor was meticulous about every citation.","अत्यंत सावधान"],
-["Resilient","/rɪˈzɪliənt/ · adjective","Able to recover quickly from difficulty or change.","Like a spring that returns to its shape.","Resilient communities adapt after economic shocks.","कठिनाइयों से उबरने वाला"],
+["Resilient","/rɪˈzɪliənt/ · adjective","Able to recover quickly from difficulty or change.","Like a spring that returns to its shape.","Resilient communities adapt after economic shocks.","लचीला"],
 ["Inherent","/ɪnˈhɪərənt/ · adjective","Existing as a natural or essential part of something.","Built into its nature.","Risk is inherent in every major investment.","अंतर्निहित"],
 ["Intrinsic","/ɪnˈtrɪnzɪk/ · adjective","Belonging naturally to the essential nature of something.","Value from within.","Curiosity has intrinsic value in the learning process.","आंतरिक"],
 ["Extrinsic","/ɪkˈstrɪnzɪk/ · adjective","Coming from outside rather than the essential nature of something.","External rewards or pressures.","Extrinsic rewards may not sustain long-term motivation.","बाहरी"],
@@ -613,7 +640,6 @@ const words = [
 ["Vindicate","/ˈvɪndɪkeɪt/ · verb","To clear someone of blame or prove that they were right.","Show that someone was justified.","The final results vindicated the researcher's original hypothesis.","सही साबित करना"],
 ["Whimsical","/ˈwɪmzɪkəl/ · adjective","Playfully unusual or fanciful.","A playful imagination.","The author uses whimsical imagery to soften a serious argument.","कल्पनाशील"],
 ["Zealous","/ˈzeləs/ · adjective","Showing great energy and enthusiasm for a cause.","Passionate commitment.","The zealous campaigners worked tirelessly for reform.","उत्साही"]
-
 ];
 
 
@@ -678,7 +704,7 @@ document.getElementById("jump").addEventListener("change", e => {
 showWord(0);
 
 
-/* COUNTRY FACTS — NEW ONE EVERY MINUTE */
+/* COUNTRY FACTS — REFRESH EVERY MINUTE */
 
 const places = [
   ["Japan","Tokyo","Japan has more than 14,000 islands."],
