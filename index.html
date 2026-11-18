@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Moonlit Clock</title>
 
 <style>
@@ -11,13 +11,8 @@
 body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
 
 .banner{
-  width:100%;
-  min-height:145px;
-  position:relative;
-  overflow:hidden;
-  padding:12px 22px 7px;
-  border:1px solid #756e53;
-  border-radius:13px;
+  width:100%;min-height:145px;position:relative;overflow:hidden;
+  padding:12px 22px 7px;border:1px solid #756e53;border-radius:13px;
   background:linear-gradient(110deg,#19231f,#292722);
   box-shadow:inset 0 1px #ffffff15,0 7px 24px #0003;
 }
@@ -26,51 +21,31 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
 .star{position:absolute;color:#f6e8b9;text-shadow:0 0 5px #fff3b0}
 
 .layout{
-  position:relative;
-  z-index:1;
-  display:grid;
-  grid-template-columns:30% 12% 58%;
-  align-items:center;
-  min-height:112px;
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:30% 12% 58%;
+  align-items:center;min-height:112px;
 }
 
 /* CLOCK */
 .clock-section{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  padding-left:5%;
+  display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:center;padding-left:5%;
 }
 .time{
-  font-size:clamp(46px,4.6vw,63px);
-  letter-spacing:5px;
-  line-height:1.1;
-  font-variant-numeric:tabular-nums;
-  white-space:nowrap;
-  color:#eee6d2;
+  font-size:clamp(46px,4.6vw,63px);letter-spacing:5px;
+  line-height:1.1;font-variant-numeric:tabular-nums;
+  white-space:nowrap;color:#eee6d2;
 }
 .date{
-  margin-top:7px;
-  font-size:13px;
-  letter-spacing:1.8px;
-  color:#b8c5a2;
-  text-transform:uppercase;
-  white-space:nowrap;
+  margin-top:7px;font-size:13px;letter-spacing:1.8px;
+  color:#b8c5a2;text-transform:uppercase;white-space:nowrap;
 }
 
-/* MOON AND SUN */
-.celestial{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+/* SUN AND MOON */
+.celestial{display:flex;align-items:center;justify-content:center}
 .celestial svg{
-  width:100px;
-  height:100px;
-  overflow:visible;
-  shape-rendering:crispEdges;
-  filter:drop-shadow(0 0 12px #f2df9e40);
+  width:100px;height:100px;overflow:visible;
+  shape-rendering:crispEdges;filter:drop-shadow(0 0 12px #f2df9e40);
 }
 .moon-art,.sun-art{display:none}
 .celestial.is-night .moon-art,
@@ -79,116 +54,61 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
 /* VOCABULARY */
 .vocab{
   border-left:1px solid #a89b7044;
-  padding-left:22px;
-  padding-right:12px;
+  padding-left:22px;padding-right:25px;
   display:grid;
-  grid-template-columns:minmax(0,1fr) 180px;
-  column-gap:22px;
-  align-items:start;
-  min-width:0;
+  grid-template-columns:minmax(0,1fr) 245px;
+  column-gap:28px;align-items:start;min-width:0;
 }
 
 .word{
-  grid-column:1/-1;
-  font-size:clamp(27px,2.5vw,35px);
-  color:#f2dfb4;
-  font-weight:bold;
-  margin-bottom:5px;
-  line-height:1.15;
+  grid-column:1/-1;font-size:clamp(27px,2.5vw,35px);
+  color:#f2dfb4;font-weight:bold;margin-bottom:5px;line-height:1.15;
 }
 .word-meta{
-  grid-column:1/-1;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  margin-bottom:7px;
-  color:#b8c5a2;
+  grid-column:1/-1;font-size:12px;margin-bottom:7px;color:#b8c5a2;
 }
 .meaning{
-  grid-column:1;
-  font-size:17px;
-  line-height:1.5;
-  margin-bottom:7px;
+  grid-column:1;font-size:17px;line-height:1.5;margin-bottom:7px;
 }
 #mnemonic,#example{
-  grid-column:1;
-  font-size:14px;
-  line-height:1.5;
-  margin-top:5px;
+  grid-column:1;font-size:14px;line-height:1.5;margin-top:5px;
 }
 #hindi,#synonyms,#antonyms{
-  grid-column:2;
-  font-size:13px;
-  line-height:1.5;
-  margin-top:5px;
-  color:#d8c99f;
-  padding-left:15px;
-  border-left:1px solid #a89b7044;
+  grid-column:2;grid-row:auto;
+  font-size:13px;line-height:1.5;margin-top:5px;
+  padding-left:15px;border-left:1px solid #a89b7044;
+  color:#eee6d2;
 }
 #hindi{grid-row:3}
 #synonyms{grid-row:4}
 #antonyms{grid-row:5}
+.vocab-label{color:#d8c99f;font-weight:normal}
+.vocab-value{color:#eee6d2}
 .detail b{color:#d8c99f;font-weight:normal}
 
-/* BOTTOM BAR */
+/* BOTTOM */
 .bottom{
-  position:relative;
-  z-index:1;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-top:5px;
-  padding-top:5px;
-  border-top:1px solid #ffffff13;
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  min-height:22px;
+  position:relative;z-index:1;display:flex;align-items:center;
+  justify-content:space-between;gap:15px;margin-top:5px;padding-top:5px;
+  border-top:1px solid #ffffff13;font-family:Arial,sans-serif;
+  font-size:13px;min-height:22px;
 }
 .country{
-  flex:1;
-  min-width:0;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  font-size:12px;
-  color:#b8c5a2;
+  flex:1;min-width:0;overflow:hidden;white-space:nowrap;
+  text-overflow:ellipsis;font-size:12px;color:#b8c5a2;
 }
-
-/* NAVIGATION */
-.controls{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  flex-shrink:0;
-}
+.controls{display:flex;align-items:center;gap:7px;flex-shrink:0}
 .controls button{
-  width:25px;
-  height:23px;
-  border:1px solid #8c876c66;
-  border-radius:5px;
-  background:#ffffff09;
-  color:#e8d7a9;
-  cursor:pointer;
-  font-size:15px;
+  width:25px;height:23px;border:1px solid #8c876c66;border-radius:5px;
+  background:#ffffff09;color:#e8d7a9;cursor:pointer;font-size:15px;
 }
 .controls button:hover{background:#ffffff20}
 .controls input{
-  width:43px;
-  height:23px;
-  background:#ffffff09;
-  color:#eee6d2;
-  border:1px solid #8c876c66;
-  border-radius:5px;
-  text-align:center;
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  outline:none;
+  width:43px;height:23px;background:#ffffff09;color:#eee6d2;
+  border:1px solid #8c876c66;border-radius:5px;text-align:center;
+  font-family:Arial,sans-serif;font-size:10px;outline:none;
 }
-.controls span{
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  color:#9da995;
-}
+.controls span{font-family:Arial,sans-serif;font-size:10px;color:#9da995}
 
 /* MOBILE */
 @media(max-width:700px){
@@ -198,30 +118,19 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
   .time{font-size:32px;letter-spacing:3px}
   .date{font-size:8px;letter-spacing:1px}
   .celestial{
-    position:absolute;
-    top:0;
-    right:4px;
-    opacity:.8;
-    pointer-events:none;
+    position:absolute;top:0;right:4px;opacity:.8;pointer-events:none;
   }
   .celestial svg{width:40px;height:40px}
   .vocab{
-    grid-template-columns:1fr;
-    border-left:none;
-    border-top:1px solid #a89b7044;
-    padding:12px 0 0;
+    grid-template-columns:1fr;border-left:none;
+    border-top:1px solid #a89b7044;padding:12px 0 0;
   }
   .word,.word-meta,.meaning,#mnemonic,#example,
-  #hindi,#synonyms,#antonyms{
-    grid-column:1;
-    grid-row:auto;
-  }
+  #hindi,#synonyms,#antonyms{grid-column:1;grid-row:auto}
   .word{font-size:21px}
   .meaning{font-size:12px}
   #mnemonic,#example,#hindi,#synonyms,#antonyms{
-    font-size:10px;
-    border-left:none;
-    padding-left:0;
+    font-size:10px;border-left:none;padding-left:0;
   }
   .bottom{flex-wrap:wrap;gap:8px;margin-top:5px;padding-top:5px}
   .country{flex-basis:100%;font-size:9px}
@@ -245,7 +154,11 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
     <span class="star" style="top:70%;left:70%;font-size:8px">✧</span>
     <span class="star" style="top:83%;left:88%">✦</span>
     <span class="star" style="top:48%;left:15%;font-size:6px">·</span>
-    <span class="star" style="top:52%;left:85%;font-size:6px">·</span>
+
+    <!-- Stars kept in the empty far-right area -->
+    <span class="star" style="top:12%;right:2%;font-size:8px">✦</span>
+    <span class="star" style="top:82%;right:5%;font-size:7px">✧</span>
+    <span class="star" style="top:48%;right:1%;font-size:6px">·</span>
   </div>
 
   <div class="layout">
@@ -256,7 +169,6 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
     </div>
 
     <div class="celestial" id="celestial">
-
       <svg class="moon-art" viewBox="0 0 64 64">
         <circle cx="32" cy="32" r="23" fill="#f2df9e"/>
         <g fill="#d6bd7c">
@@ -283,7 +195,6 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
           M25 14h14v5h5v6h5v14h-5v5h-5v5H25v-5h-5v-5h-5V25h5v-6h5z"/>
         <path fill="#ffe5a3" d="M25 14h10v5H25z M15 25h5v10h-5z"/>
       </svg>
-
     </div>
 
     <div class="vocab">
@@ -292,9 +203,9 @@ body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
       <div class="meaning" id="meaning"></div>
       <div class="detail" id="mnemonic"></div>
       <div class="detail" id="example"></div>
-      <div class="detail" id="hindi"></div>
-      <div class="detail" id="synonyms"></div>
-      <div class="detail" id="antonyms"></div>
+      <div id="hindi"></div>
+      <div id="synonyms"></div>
+      <div id="antonyms"></div>
     </div>
 
   </div>
@@ -353,7 +264,7 @@ setInterval(updateCelestial,60000);
 
 /*
 VOCABULARY FORMAT:
-[word, pronunciation, meaning, memory trick, example, Hindi, synonyms, antonyms]
+[word, pronunciation, meaning, memory, example, Hindi, synonyms, antonyms]
 */
 
 const words=[
@@ -398,13 +309,13 @@ const words=[
 ["Pervasive","/pəˈveɪsɪv/ · adjective","Spreading widely throughout an area or group.","A problem that seeps everywhere.","The passage examines the pervasive influence of advertising.","व्यापक · सर्वव्यापी","Widespread, prevalent, ubiquitous","Limited, confined"],
 ["Egregious","/ɪˈɡriːdʒəs/ · adjective","Outstandingly bad or shocking.","A mistake so bad that it stands out.","The report exposed egregious violations of public trust.","घोर · अत्यंत गंभीर","Outrageous, glaring, appalling","Minor, trivial"],
 ["Benevolent","/bəˈnevələnt/ · adjective","Well meaning and kindly.","Bene = good; wishing good for others.","The benevolent organisation funded rural education.","परोपकारी · दयालु","Kind, charitable, generous","Malevolent, cruel"],
-["Malevolent","/məˈlevələnt/ · adjective","Having or showing a desire to cause harm.","Harmful intentions.","The novel portrays a malevolent ruler.","दुर्भावनापूर्ण · दुष्ट","Malicious, hostile, harmful","Benevolent, benevolent"],
+["Malevolent","/məˈlevələnt/ · adjective","Having or showing a desire to cause harm.","Harmful intentions.","The novel portrays a malevolent ruler.","दुर्भावनापूर्ण · दुष्ट","Malicious, hostile, harmful","Benevolent, kind"],
 ["Prudent","/ˈpruːdnt/ · adjective","Acting with care and good judgement.","Pause and think before acting.","It would be prudent to examine the risks first.","विवेकपूर्ण · समझदार","Wise, cautious, judicious","Reckless, imprudent"],
 ["Candid","/ˈkændɪd/ · adjective","Honest, direct and sincere.","A candid answer does not hide the truth.","She gave a candid assessment of the project.","स्पष्टवादी · निष्कपट","Frank, honest, straightforward","Deceptive, guarded"],
 ["Lucid","/ˈluːsɪd/ · adjective","Clear and easy to understand.","A lucid explanation clears confusion.","The professor offered a lucid account of the theory.","सुबोध · स्पष्ट","Clear, intelligible, coherent","Confusing, obscure"],
 ["Concise","/kənˈsaɪs/ · adjective","Brief but containing all necessary information.","Cut the excess, keep the essence.","A concise summary captures the author's central argument.","संक्षिप्त · सारगर्भित","Brief, succinct, terse","Verbose, wordy"],
 ["Verbose","/vɜːˈbəʊs/ · adjective","Using more words than necessary.","Too many words for a simple point.","The essay is verbose and could be more focused.","शब्दाडंबरपूर्ण · बहुत शब्दों वाला","Wordy, prolix, long-winded","Concise, succinct"],
-["Redundant","/rɪˈdʌndənt/ · adjective","Unnecessary because it is repeated or no longer useful.","Something extra that adds no value.","The final paragraph is redundant because it repeats the introduction.","अनावश्यक · निरर्थक","Superfluous, repetitive, needless","Essential, necessary"],
+["Redundant","/ˈrɪdʌndənt/ · adjective","Unnecessary because it is repeated or no longer useful.","Something extra that adds no value.","The final paragraph is redundant because it repeats the introduction.","अनावश्यक · निरर्थक","Superfluous, repetitive, needless","Essential, necessary"],
 ["Discrepancy","/dɪˈskrepənsi/ · noun","A difference or inconsistency between things that should agree.","A gap between two accounts.","The audit revealed a discrepancy in the financial records.","विसंगति · अंतर","Inconsistency, disparity, deviation","Agreement, consistency"],
 ["Corroborate","/kəˈrɒbəreɪt/ · verb","To confirm or support a statement with additional evidence.","An independent source backs you up.","The second study corroborated the original findings.","पुष्टि करना · प्रमाणित करना","Confirm, substantiate, verify","Contradict, refute"],
 ["Delineate","/dɪˈlɪnieɪt/ · verb","To describe or define something precisely.","Draw the boundaries clearly.","The author delineates the limits of the proposed theory.","रेखांकित करना · स्पष्ट परिभाषित करना","Define, outline, describe","Blur, obscure"],
@@ -496,8 +407,25 @@ const words=[
 ["Zealous","/ˈzeləs/ · adjective","Showing great energy and enthusiasm for a cause.","Passionate commitment.","The zealous campaigners worked tirelessly for reform.","उत्साही · जोशीला","Passionate, fervent, devoted","Indifferent, apathetic"]
 ];
 
-/* VOCABULARY NAVIGATION */
+/* DISPLAY WORD */
 let currentWord=0;
+
+function setEntry(id,label,value){
+  const el=document.getElementById(id);
+  el.replaceChildren();
+
+  if(label){
+    const heading=document.createElement("span");
+    heading.className="vocab-label";
+    heading.textContent=label+" ";
+    el.append(heading);
+  }
+
+  const content=document.createElement("span");
+  content.className="vocab-value";
+  content.textContent=value||"—";
+  el.append(content);
+}
 
 function showWord(index){
   if(index<0||index>=words.length)return;
@@ -508,24 +436,11 @@ function showWord(index){
   document.getElementById("wordMeta").textContent=w[1];
   document.getElementById("meaning").textContent=w[2];
 
-  const fields=[
-    ["mnemonic","Memory: ",w[3]],
-    ["example","Example: ",w[4]],
-    ["hindi","",w[5]],
-    ["synonyms","Similar: ",w[6]],
-    ["antonyms","Opposite: ",w[7]]
-  ];
-
-  fields.forEach(([id,label,value])=>{
-    const el=document.getElementById(id);
-    el.replaceChildren();
-    if(label){
-      const b=document.createElement("b");
-      b.textContent=label;
-      el.append(b);
-    }
-    el.append(document.createTextNode(value||""));
-  });
+  setEntry("mnemonic","Memory:",w[3]);
+  setEntry("example","Example:",w[4]);
+  setEntry("hindi","",w[5]);
+  setEntry("synonyms","Synonyms:",w[6]);
+  setEntry("antonyms","Antonyms:",w[7]);
 
   document.getElementById("totalWords").textContent="/ "+words.length;
   document.getElementById("jump").value=index+1;
@@ -544,37 +459,35 @@ document.getElementById("jump").addEventListener("change",e=>{
 });
 showWord(0);
 
-/* COUNTRY FACTS — REFRESH EVERY MINUTE */
+/* COUNTRY FACTS — NEW FACT EVERY MINUTE */
 const places=[
-  ["Japan","Tokyo","Japan has more than 14,000 islands."],
-  ["Iceland","Reykjavik","Iceland has no native mosquitoes."],
-  ["Bhutan","Thimphu","Bhutan measures progress with Gross National Happiness."],
-  ["Peru","Lima","Peru is home to the ancient city of Machu Picchu."],
-  ["Finland","Helsinki","Finland has around 188,000 lakes."],
-  ["Morocco","Rabat","Morocco is home to the world's oldest university."],
-  ["New Zealand","Wellington","New Zealand has more sheep than people."],
-  ["South Korea","Seoul","South Korea has a special word for the age of one year."],
-  ["Egypt","Cairo","Ancient Egyptians used a 365-day calendar."],
-  ["Norway","Oslo","Norway has a town where the sun doesn't rise for weeks in winter."],
-  ["Canada","Ottawa","Canada has more lakes than any other country."],
-  ["Greece","Athens","Greece has thousands of islands."],
-  ["Australia","Canberra","Australia is wider than the Moon."],
-  ["Italy","Rome","Italy has more UNESCO World Heritage sites than any other country."],
-  ["Nepal","Kathmandu","Nepal is home to eight of the world's ten tallest mountains."],
-  ["Madagascar","Antananarivo","Most of Madagascar's wildlife is found nowhere else on Earth."],
-  ["Chile","Santiago","Chile is home to the driest non-polar desert on Earth."],
-  ["Turkey","Ankara","Istanbul spans two continents."],
-  ["Switzerland","Bern","Switzerland has four national languages."],
-  ["Mexico","Mexico City","Mexico City was built on an ancient lake."]
+["Japan","Tokyo","Japan has more than 14,000 islands."],
+["Iceland","Reykjavik","Iceland has no native mosquitoes."],
+["Bhutan","Thimphu","Bhutan measures progress with Gross National Happiness."],
+["Peru","Lima","Peru is home to the ancient city of Machu Picchu."],
+["Finland","Helsinki","Finland has around 188,000 lakes."],
+["Morocco","Rabat","Morocco is home to the world's oldest university."],
+["New Zealand","Wellington","New Zealand has more sheep than people."],
+["South Korea","Seoul","South Korea has a special word for the age of one year."],
+["Egypt","Cairo","Ancient Egyptians used a 365-day calendar."],
+["Norway","Oslo","Norway has a town where the sun doesn't rise for weeks in winter."],
+["Canada","Ottawa","Canada has more lakes than any other country."],
+["Greece","Athens","Greece has thousands of islands."],
+["Australia","Canberra","Australia is wider than the Moon."],
+["Italy","Rome","Italy has more UNESCO World Heritage sites than any other country."],
+["Nepal","Kathmandu","Nepal is home to eight of the world's ten tallest mountains."],
+["Madagascar","Antananarivo","Most of Madagascar's wildlife is found nowhere else on Earth."],
+["Chile","Santiago","Chile is home to the driest non-polar desert on Earth."],
+["Turkey","Ankara","Istanbul spans two continents."],
+["Switzerland","Bern","Switzerland has four national languages."],
+["Mexico","Mexico City","Mexico City was built on an ancient lake."]
 ];
 
 let lastPlace=-1;
-
 function changeCountry(){
   let next;
-  do{
-    next=Math.floor(Math.random()*places.length);
-  }while(next===lastPlace);
+  do{next=Math.floor(Math.random()*places.length)}
+  while(next===lastPlace);
 
   lastPlace=next;
   const [country,capital,fact]=places[next];
