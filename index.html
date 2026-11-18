@@ -7,324 +7,225 @@
 <title>Moonlit Clock</title>
 
 <style>
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
+body{margin:0;background:transparent;color:#eee6d2;font-family:Georgia,serif}
 
-body {
-  margin: 0;
-  background: transparent;
-  font-family: Georgia, serif;
-  color: #eee6d2;
+.banner{
+  width:100%;
+  min-height:145px;
+  position:relative;
+  overflow:hidden;
+  padding:12px 22px 7px;
+  border:1px solid #756e53;
+  border-radius:13px;
+  background:linear-gradient(110deg,#19231f,#292722);
+  box-shadow:inset 0 1px #ffffff15,0 7px 24px #0003;
 }
 
-.banner {
-  width: 100%;
-  min-height: 145px;
-  position: relative;
-  overflow: hidden;
-  padding: 12px 22px 8px;
-  border: 1px solid #756e53;
-  border-radius: 13px;
-  background: linear-gradient(110deg,#19231f,#292722);
-  box-shadow: inset 0 1px #ffffff15,0 7px 24px #0003;
-}
+.stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;color:#f6e8b9;text-shadow:0 0 5px #fff3b0}
 
-.stars {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.star {
-  position: absolute;
-  color: #f6e8b9;
-  text-shadow: 0 0 5px #fff3b0;
-}
-
-.layout {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 0.95fr 110px 2.3fr;
-  align-items: center;
-  gap: 20px;
-  min-height: 112px;
+.layout{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:30% 12% 58%;
+  align-items:center;
+  min-height:112px;
 }
 
 /* CLOCK */
-
-.clock-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding-left: 5%;
+.clock-section{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  padding-left:5%;
 }
-
-.time {
-  font-size: clamp(46px,4.6vw,63px);
-  letter-spacing: 5px;
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-  color: #eee6d2;
-  text-shadow: 0 0 14px #e7d7a322;
-  white-space: nowrap;
+.time{
+  font-size:clamp(46px,4.6vw,63px);
+  letter-spacing:5px;
+  line-height:1.1;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  color:#eee6d2;
 }
-
-.date {
-  margin-top: 7px;
-  font-size: 13px;
-  letter-spacing: 1.8px;
-  color: #b8c5a2;
-  text-transform: uppercase;
-  white-space: nowrap;
+.date{
+  margin-top:7px;
+  font-size:13px;
+  letter-spacing:1.8px;
+  color:#b8c5a2;
+  text-transform:uppercase;
+  white-space:nowrap;
 }
 
 /* MOON AND SUN */
-
-.celestial {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.celestial{
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-
-.celestial svg {
-  width: 100px;
-  height: 100px;
-  overflow: visible;
-  shape-rendering: crispEdges;
-  filter: drop-shadow(0 0 12px #f2df9e40);
+.celestial svg{
+  width:100px;
+  height:100px;
+  overflow:visible;
+  shape-rendering:crispEdges;
+  filter:drop-shadow(0 0 12px #f2df9e40);
 }
-
-.moon-art,
-.sun-art {
-  display: none;
-}
-
+.moon-art,.sun-art{display:none}
 .celestial.is-night .moon-art,
-.celestial.is-day .sun-art {
-  display: block;
-}
+.celestial.is-day .sun-art{display:block}
 
 /* VOCABULARY */
-
-.vocab {
-  border-left: 1px solid #a89b7044;
-  padding-left: 25px;
-  display: grid;
-  grid-template-columns: minmax(0,1fr) 155px;
-  column-gap: 22px;
-  align-items: start;
-  min-width: 0;
+.vocab{
+  border-left:1px solid #a89b7044;
+  padding-left:22px;
+  padding-right:12px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 180px;
+  column-gap:22px;
+  align-items:start;
+  min-width:0;
 }
 
-.word {
-  grid-column: 1 / -1;
-  font-size: clamp(27px,2.5vw,35px);
-  color: #f2dfb4;
-  font-weight: bold;
-  margin-bottom: 5px;
-  line-height: 1.15;
+.word{
+  grid-column:1/-1;
+  font-size:clamp(27px,2.5vw,35px);
+  color:#f2dfb4;
+  font-weight:bold;
+  margin-bottom:5px;
+  line-height:1.15;
 }
-
-.word-meta {
-  grid-column: 1 / -1;
-  font-family: Arial,sans-serif;
-  font-size: 12px;
-  margin-bottom: 7px;
-  color: #b8c5a2;
+.word-meta{
+  grid-column:1/-1;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  margin-bottom:7px;
+  color:#b8c5a2;
 }
-
-.meaning {
-  grid-column: 1;
-  font-size: 16px;
-  line-height: 1.45;
-  margin-bottom: 5px;
-  color: #eee6d2;
+.meaning{
+  grid-column:1;
+  font-size:17px;
+  line-height:1.5;
+  margin-bottom:7px;
 }
-
-#mnemonic,
-#example {
-  grid-column: 1;
-  font-size: 13px;
-  line-height: 1.45;
-  margin-top: 4px;
+#mnemonic,#example{
+  grid-column:1;
+  font-size:14px;
+  line-height:1.5;
+  margin-top:5px;
 }
-
-#hindi {
-  grid-column: 2;
-  grid-row: 3 / span 3;
-  align-self: center;
-  border-left: 1px solid #a89b7044;
-  padding-left: 16px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #d8c99f;
+#hindi,#synonyms,#antonyms{
+  grid-column:2;
+  font-size:13px;
+  line-height:1.5;
+  margin-top:5px;
+  color:#d8c99f;
+  padding-left:15px;
+  border-left:1px solid #a89b7044;
 }
-
-.detail b {
-  color: #d8c99f;
-  font-weight: normal;
-}
+#hindi{grid-row:3}
+#synonyms{grid-row:4}
+#antonyms{grid-row:5}
+.detail b{color:#d8c99f;font-weight:normal}
 
 /* BOTTOM BAR */
-
-.bottom {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 5px;
-  padding-top: 5px;
-  border-top: 1px solid #ffffff13;
-  font-family: Arial,sans-serif;
-  font-size: 13px;
-  min-height: 22px;
+.bottom{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-top:5px;
+  padding-top:5px;
+  border-top:1px solid #ffffff13;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  min-height:22px;
 }
-
-.country {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 12px;
-  color: #b8c5a2;
+.country{
+  flex:1;
+  min-width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:12px;
+  color:#b8c5a2;
 }
 
 /* NAVIGATION */
-
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  flex-shrink: 0;
+.controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-shrink:0;
 }
-
-.controls button {
-  width: 25px;
-  height: 23px;
-  border: 1px solid #8c876c66;
-  border-radius: 5px;
-  background: #ffffff09;
-  color: #e8d7a9;
-  cursor: pointer;
-  font-size: 15px;
+.controls button{
+  width:25px;
+  height:23px;
+  border:1px solid #8c876c66;
+  border-radius:5px;
+  background:#ffffff09;
+  color:#e8d7a9;
+  cursor:pointer;
+  font-size:15px;
 }
-
-.controls button:hover {
-  background: #ffffff20;
+.controls button:hover{background:#ffffff20}
+.controls input{
+  width:43px;
+  height:23px;
+  background:#ffffff09;
+  color:#eee6d2;
+  border:1px solid #8c876c66;
+  border-radius:5px;
+  text-align:center;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  outline:none;
 }
-
-.controls input {
-  width: 43px;
-  height: 23px;
-  background: #ffffff09;
-  color: #eee6d2;
-  border: 1px solid #8c876c66;
-  border-radius: 5px;
-  text-align: center;
-  font-family: Arial,sans-serif;
-  font-size: 10px;
-  outline: none;
-}
-
-.controls span {
-  font-family: Arial,sans-serif;
-  font-size: 10px;
-  color: #9da995;
+.controls span{
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  color:#9da995;
 }
 
 /* MOBILE */
-
-@media(max-width:700px) {
-  .banner {
-    padding: 12px 13px 8px;
-    min-height: unset;
+@media(max-width:700px){
+  .banner{padding:12px 13px 8px;min-height:unset}
+  .layout{grid-template-columns:1fr;gap:13px;min-height:unset}
+  .clock-section{align-items:center;padding:5px 0}
+  .time{font-size:32px;letter-spacing:3px}
+  .date{font-size:8px;letter-spacing:1px}
+  .celestial{
+    position:absolute;
+    top:0;
+    right:4px;
+    opacity:.8;
+    pointer-events:none;
   }
-
-  .layout {
-    grid-template-columns: 1fr;
-    gap: 13px;
-    min-height: unset;
+  .celestial svg{width:40px;height:40px}
+  .vocab{
+    grid-template-columns:1fr;
+    border-left:none;
+    border-top:1px solid #a89b7044;
+    padding:12px 0 0;
   }
-
-  .clock-section {
-    align-items: center;
-    padding: 5px 0;
+  .word,.word-meta,.meaning,#mnemonic,#example,
+  #hindi,#synonyms,#antonyms{
+    grid-column:1;
+    grid-row:auto;
   }
-
-  .time {
-    font-size: 32px;
-    letter-spacing: 3px;
+  .word{font-size:21px}
+  .meaning{font-size:12px}
+  #mnemonic,#example,#hindi,#synonyms,#antonyms{
+    font-size:10px;
+    border-left:none;
+    padding-left:0;
   }
-
-  .date {
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-
-  .celestial {
-    position: absolute;
-    top: 0;
-    right: 4px;
-    opacity: .8;
-    pointer-events: none;
-  }
-
-  .celestial svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .vocab {
-    border-left: none;
-    border-top: 1px solid #a89b7044;
-    padding: 12px 0 0;
-    grid-template-columns: 1fr;
-  }
-
-  .word,
-  .word-meta,
-  .meaning,
-  #mnemonic,
-  #example,
-  #hindi {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .word { font-size: 21px; }
-  .meaning { font-size: 12px; }
-
-  #mnemonic,
-  #example,
-  #hindi {
-    font-size: 10px;
-  }
-
-  #hindi {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .bottom {
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 5px;
-    padding-top: 5px;
-  }
-
-  .country {
-    flex-basis: 100%;
-    font-size: 9px;
-  }
-
-  .controls {
-    justify-content: flex-end;
-  }
+  .bottom{flex-wrap:wrap;gap:8px;margin-top:5px;padding-top:5px}
+  .country{flex-basis:100%;font-size:9px}
+  .controls{justify-content:flex-end}
 }
 </style>
 </head>
@@ -349,13 +250,11 @@ body {
 
   <div class="layout">
 
-    <!-- CLOCK -->
     <div class="clock-section">
       <div class="time" id="time">00:00:00</div>
       <div class="date" id="date">Loading date</div>
     </div>
 
-    <!-- MOON / SUN -->
     <div class="celestial" id="celestial">
 
       <svg class="moon-art" viewBox="0 0 64 64">
@@ -376,58 +275,32 @@ body {
 
       <svg class="sun-art" viewBox="0 0 64 64">
         <path fill="#d8a85c" d="
-          M30 2h4v10h-4z
-          M30 52h4v10h-4z
-          M2 30h10v4H2z
-          M52 30h10v4h-10z
-          M10 10h6v6h-6z
-          M48 10h6v6h-6z
-          M10 48h6v6h-6z
-          M48 48h6v6h-6z"/>
+          M30 2h4v10h-4z M30 52h4v10h-4z
+          M2 30h10v4H2z M52 30h10v4h-10z
+          M10 10h6v6h-6z M48 10h6v6h-6z
+          M10 48h6v6h-6z M48 48h6v6h-6z"/>
         <path fill="#f2c879" d="
           M25 14h14v5h5v6h5v14h-5v5h-5v5H25v-5h-5v-5h-5V25h5v-6h5z"/>
-        <path fill="#ffe5a3" d="
-          M25 14h10v5H25z
-          M15 25h5v10h-5z"/>
+        <path fill="#ffe5a3" d="M25 14h10v5H25z M15 25h5v10h-5z"/>
       </svg>
 
     </div>
 
-    <!-- VOCABULARY -->
     <div class="vocab">
-
       <div class="word" id="word">1 – Epiphany</div>
-
-      <div class="word-meta" id="wordMeta">
-        /ɪˈpɪfəni/ · noun
-      </div>
-
-      <div class="meaning" id="meaning">
-        A sudden, profound realisation or moment of clarity.
-      </div>
-
-      <div class="detail" id="mnemonic">
-        <b>Memory:</b> A light suddenly switching on in your mind.
-      </div>
-
-      <div class="detail" id="example">
-        <b>Example:</b> The passage led me to an epiphany about human ambition.
-      </div>
-
-      <div class="detail" id="hindi">
-        <b>Hindi:</b> बोध · अचानक हुई गहरी अनुभूति
-      </div>
-
+      <div class="word-meta" id="wordMeta"></div>
+      <div class="meaning" id="meaning"></div>
+      <div class="detail" id="mnemonic"></div>
+      <div class="detail" id="example"></div>
+      <div class="detail" id="hindi"></div>
+      <div class="detail" id="synonyms"></div>
+      <div class="detail" id="antonyms"></div>
     </div>
+
   </div>
 
-  <!-- COUNTRY FACT + NAVIGATION -->
   <div class="bottom">
-
-    <div class="country" id="country">
-      Discovering somewhere...
-    </div>
-
+    <div class="country" id="country">Discovering somewhere...</div>
     <div class="controls">
       <button id="previous" title="Previous word">‹</button>
       <button id="next" title="Next word">›</button>
@@ -435,278 +308,244 @@ body {
       <input id="jump" type="number" min="1" placeholder="No." aria-label="Word number">
       <span id="totalWords"></span>
     </div>
-
   </div>
 </div>
 
 <script>
+/* CLOCK */
+const zone="Asia/Kolkata";
 
-/* CLOCK: INDIA TIME */
-
-const zone = "Asia/Kolkata";
-
-function updateClock() {
-  const now = new Date();
-
-  document.getElementById("time").textContent =
-    new Intl.DateTimeFormat("en-GB", {
-      timeZone: zone,
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hourCycle: "h23"
+function updateClock(){
+  const now=new Date();
+  document.getElementById("time").textContent=
+    new Intl.DateTimeFormat("en-GB",{
+      timeZone:zone,hour:"2-digit",minute:"2-digit",
+      second:"2-digit",hourCycle:"h23"
     }).format(now);
 
-  document.getElementById("date").textContent =
-    new Intl.DateTimeFormat("en-GB", {
-      timeZone: zone,
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
+  document.getElementById("date").textContent=
+    new Intl.DateTimeFormat("en-GB",{
+      timeZone:zone,weekday:"long",day:"2-digit",
+      month:"long",year:"numeric"
     }).format(now);
 }
-
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 
+/* MOON AT NIGHT, SUN DURING DAY */
+const celestial=document.getElementById("celestial");
 
-/* MOON AT NIGHT, SUN DURING THE DAY */
+function updateCelestial(){
+  const hour=Number(new Intl.DateTimeFormat("en-GB",{
+    timeZone:zone,hour:"2-digit",hourCycle:"h23"
+  }).format(new Date()));
 
-const celestial = document.getElementById("celestial");
-
-function updateCelestial() {
-  const hour = Number(
-    new Intl.DateTimeFormat("en-GB", {
-      timeZone: zone,
-      hour: "2-digit",
-      hourCycle: "h23"
-    }).format(new Date())
-  );
-
-  if (hour >= 17 || hour < 5) {
+  if(hour>=17||hour<5){
     celestial.classList.add("is-night");
     celestial.classList.remove("is-day");
-  } else {
+  }else{
     celestial.classList.add("is-day");
     celestial.classList.remove("is-night");
   }
 }
-
 updateCelestial();
-setInterval(updateCelestial, 60000);
+setInterval(updateCelestial,60000);
 
-
-/* VOCABULARY COLLECTION
-   Format:
-   [word, pronunciation, meaning, mnemonic, example, Hindi]
+/*
+VOCABULARY FORMAT:
+[word, pronunciation, meaning, memory trick, example, Hindi, synonyms, antonyms]
 */
 
-const words = [
-["Epiphany","/ɪˈpɪfəni/ · noun","A sudden, profound realisation or moment of clarity.","Imagine a light suddenly switching on in your mind.","The passage led me to an epiphany about human ambition.","बोध · अचानक हुई गहरी अनुभूति"],
-["Epistemology","/ɪˌpɪstəˈmɒlədʒi/ · noun","The branch of philosophy concerned with knowledge and how we know things.","Episteme = knowledge; -ology = study.","The author questions the epistemology behind scientific certainty.","ज्ञानमीमांसा"],
-["Paradigm","/ˈpærədaɪm/ · noun","A model, framework or typical way of understanding something.","Think of it as the lens through which you see the world.","The discovery caused a paradigm shift in medical research.","प्रतिमान · सोचने का ढाँचा"],
-["Nuance","/ˈnjuːɑːns/ · noun","A subtle distinction or shade of meaning.","A tiny difference that changes the whole picture.","A good reader notices the nuances in the author's argument.","सूक्ष्म अंतर"],
-["Obscure","/əbˈskjʊə/ · adjective","Not clear, well known or easily understood.","Something hidden in the shadows.","The author makes an obscure reference to ancient philosophy.","अस्पष्ट · अज्ञात"],
-["Pragmatic","/præɡˈmætɪk/ · adjective","Dealing with situations practically rather than theoretically.","Practical before perfect.","We need a pragmatic solution rather than an idealistic proposal.","व्यावहारिक"],
-["Ambivalent","/æmˈbɪvələnt/ · adjective","Having mixed or conflicting feelings about something.","Ambi = both; valence = feeling.","She remained ambivalent about accepting the offer.","दुविधाग्रस्त"],
-["Altruistic","/ˌæltruˈɪstɪk/ · adjective","Showing selfless concern for others.","Helping others without expecting a return.","His altruistic actions benefited the entire community.","परोपकारी"],
-["Apathetic","/ˌæpəˈθetɪk/ · adjective","Showing little interest, enthusiasm or concern.","A = without; pathos = feeling.","Voters became apathetic towards the repeated political promises.","उदासीन"],
-["Empirical","/ɪmˈpɪrɪkəl/ · adjective","Based on observation, experience or evidence rather than theory alone.","Evidence you can observe or test.","The claim requires empirical evidence.","अनुभवजन्य"],
-["Dichotomy","/daɪˈkɒtəmi/ · noun","A division into two contrasting or opposing parts.","Di = two; think of two opposite sides.","The essay challenges the dichotomy between nature and culture.","द्वैत"],
-["Paradox","/ˈpærədɒks/ · noun","A statement or situation that seems contradictory but may reveal a truth.","An apparent contradiction with a hidden insight.","It is a paradox that greater connectivity can produce loneliness.","विरोधाभास"],
-["Conjecture","/kənˈdʒektʃə/ · noun","An opinion or conclusion based on incomplete information.","A guess that still needs proof.","Without sufficient evidence, the theory remains conjecture.","अनुमान"],
-["Inference","/ˈɪnfərəns/ · noun","A conclusion reached from evidence and reasoning.","Read between the lines.","The reader can draw an inference from the author's final paragraph.","निष्कर्ष"],
-["Premise","/ˈpremɪs/ · noun","A proposition or assumption on which an argument is based.","The foundation of an argument.","The entire argument rests on a questionable premise.","आधारभूत धारणा"],
-["Fallacy","/ˈfæləsi/ · noun","A mistaken belief or error in reasoning.","A false logic trap.","The author exposes the fallacy in assuming correlation means causation.","तर्कदोष"],
-["Rhetoric","/ˈretərɪk/ · noun","The art of persuasive or effective speaking and writing.","Words designed to persuade.","His rhetoric was powerful, but his argument lacked evidence.","वाक्पटुता"],
-["Implicit","/ɪmˈplɪsɪt/ · adjective","Suggested or understood without being directly stated.","It is inside the message, not explicitly written.","There is an implicit criticism of consumer culture in the passage.","निहित"],
-["Explicit","/ɪkˈsplɪsɪt/ · adjective","Stated clearly and directly.","Expressed openly.","The author makes an explicit distinction between the two theories.","स्पष्ट"],
-["Scrutinise","/ˈskruːtɪnaɪz/ · verb","To examine something very carefully and critically.","A scrutiny lens that checks every detail.","Researchers must scrutinise the data before drawing conclusions.","बारीकी से जाँचना"],
-["Substantiate","/səbˈstænʃieɪt/ · verb","To support a claim with evidence.","Give substance to an argument.","The researcher could not substantiate the allegation.","प्रमाणित करना"],
-["Undermine","/ˌʌndəˈmaɪn/ · verb","To weaken or damage gradually.","Imagine removing the foundation beneath a building.","The new evidence undermines the author's central claim.","कमज़ोर करना"],
-["Reconcile","/ˈrekənsaɪl/ · verb","To make two conflicting ideas or situations compatible.","Bring opposing sides together.","The philosopher attempts to reconcile freedom with social responsibility.","मेल कराना"],
-["Coherent","/kəʊˈhɪərənt/ · adjective","Logical, consistent and easy to understand.","Ideas that hold together.","The essay presents a coherent argument from beginning to end.","सुसंगत"],
-["Ambiguous","/æmˈbɪɡjuəs/ · adjective","Having more than one possible meaning or interpretation.","An ambiguous sentence has multiple readings.","The wording of the question was deliberately ambiguous.","अस्पष्ट"],
-["Arbitrary","/ˈɑːbɪtrəri/ · adjective","Based on random choice or personal preference rather than reason.","A decision without a fair rule.","The division appears arbitrary rather than scientifically justified.","मनमाना"],
-["Dogmatic","/dɒɡˈmætɪk/ · adjective","Insisting that beliefs are unquestionably correct.","Refusing to consider alternatives.","The author criticises dogmatic approaches to education.","हठधर्मी"],
-["Sceptical","/ˈskeptɪkəl/ · adjective","Not easily convinced; inclined to question claims.","A healthy 'show me the evidence' attitude.","Readers should remain sceptical of sweeping generalisations.","संदेहशील"],
-["Cynical","/ˈsɪnɪkəl/ · adjective","Believing that people are mainly motivated by self-interest.","Assuming a selfish motive behind everything.","His cynical view of politics made him distrust every promise.","निंदक"],
-["Ubiquitous","/juːˈbɪkwɪtəs/ · adjective","Present or found everywhere.","Everywhere you go, it is there.","Smartphones have become ubiquitous in modern society.","सर्वव्यापी"],
-["Eloquent","/ˈeləkwənt/ · adjective","Fluent, persuasive and expressive in speech or writing.","Words that flow with impact.","Her eloquent response changed the tone of the debate.","वाक्पटु"],
-["Articulate","/ɑːˈtɪkjələt/ · adjective/verb","Able to express ideas clearly.","Put your thoughts into clear words.","He articulated a complex idea in simple language.","स्पष्ट रूप से व्यक्त करना"],
-["Meticulous","/məˈtɪkjələs/ · adjective","Extremely careful and attentive to detail.","A person who notices even tiny details.","The editor was meticulous about every citation.","अत्यंत सावधान"],
-["Resilient","/rɪˈzɪliənt/ · adjective","Able to recover quickly from difficulty or change.","Like a spring that returns to its shape.","Resilient communities adapt after economic shocks.","लचीला"],
-["Inherent","/ɪnˈhɪərənt/ · adjective","Existing as a natural or essential part of something.","Built into its nature.","Risk is inherent in every major investment.","अंतर्निहित"],
-["Intrinsic","/ɪnˈtrɪnzɪk/ · adjective","Belonging naturally to the essential nature of something.","Value from within.","Curiosity has intrinsic value in the learning process.","आंतरिक"],
-["Extrinsic","/ɪkˈstrɪnzɪk/ · adjective","Coming from outside rather than the essential nature of something.","External rewards or pressures.","Extrinsic rewards may not sustain long-term motivation.","बाहरी"],
-["Inevitable","/ɪnˈevɪtəbl/ · adjective","Certain to happen; impossible to avoid.","Cannot be avoided.","Technological change is not always inevitable in its consequences.","अपरिहार्य"],
-["Pervasive","/pəˈveɪsɪv/ · adjective","Spreading widely throughout an area or group.","A problem that seeps everywhere.","The passage examines the pervasive influence of advertising.","व्यापक"],
-["Egregious","/ɪˈɡriːdʒəs/ · adjective","Outstandingly bad or shocking.","A mistake so bad that it stands out.","The report exposed egregious violations of public trust.","घोर"],
-["Benevolent","/bəˈnevələnt/ · adjective","Well meaning and kindly.","Bene = good; wishing good for others.","The benevolent organisation funded rural education.","परोपकारी"],
-["Malevolent","/məˈlevələnt/ · adjective","Having or showing a desire to cause harm.","Harmful intentions.","The novel portrays a malevolent ruler.","दुर्भावनापूर्ण"],
-["Prudent","/ˈpruːdnt/ · adjective","Acting with care and good judgement.","Pause and think before acting.","It would be prudent to examine the risks first.","विवेकपूर्ण"],
-["Candid","/ˈkændɪd/ · adjective","Honest, direct and sincere.","A candid answer does not hide the truth.","She gave a candid assessment of the project.","स्पष्टवादी"],
-["Lucid","/ˈluːsɪd/ · adjective","Clear and easy to understand.","A lucid explanation clears confusion.","The professor offered a lucid account of the theory.","सुबोध"],
-["Concise","/kənˈsaɪs/ · adjective","Brief but containing all necessary information.","Cut the excess, keep the essence.","A concise summary captures the author's central argument.","संक्षिप्त"],
-["Verbose","/vɜːˈbəʊs/ · adjective","Using more words than necessary.","Too many words for a simple point.","The essay is verbose and could be more focused.","शब्दाडंबरपूर्ण"],
-["Redundant","/rɪˈdʌndənt/ · adjective","Unnecessary because it is repeated or no longer useful.","Something extra that adds no value.","The final paragraph is redundant because it repeats the introduction.","अनावश्यक"],
-["Discrepancy","/dɪˈskrepənsi/ · noun","A difference or inconsistency between things that should agree.","A gap between two accounts.","The audit revealed a discrepancy in the financial records.","विसंगति"],
-["Corroborate","/kəˈrɒbəreɪt/ · verb","To confirm or support a statement with additional evidence.","An independent source backs you up.","The second study corroborated the original findings.","पुष्टि करना"],
-["Delineate","/dɪˈlɪnieɪt/ · verb","To describe or define something precisely.","Draw the boundaries clearly.","The author delineates the limits of the proposed theory.","परिभाषित करना"],
-["Elucidate","/ɪˈluːsɪdeɪt/ · verb","To make something clear or easier to understand.","Illuminate an idea.","The example helps elucidate the author's position.","स्पष्ट करना"],
-["Exacerbate","/ɪɡˈzæsəbeɪt/ · verb","To make a problem or negative situation worse.","A problem gets extra bad.","Poor planning can exacerbate an existing crisis.","और बिगाड़ना"],
-["Mitigate","/ˈmɪtɪɡeɪt/ · verb","To make something less severe, harmful or painful.","Reduce the intensity of a problem.","New policies may mitigate the effects of inequality.","प्रभाव घटाना"],
-["Precarious","/prɪˈkeəriəs/ · adjective","Uncertain, unstable or dangerously insecure.","Standing on a shaky edge.","The workers faced precarious employment conditions.","अस्थिर"],
-["Superficial","/ˌsuːpəˈfɪʃəl/ · adjective","Concerned only with the surface; lacking depth.","Surface-level understanding.","The article offers a superficial treatment of a complex issue.","सतही"],
-["Profound","/prəˈfaʊnd/ · adjective","Very deep, intense or far-reaching.","A thought that goes beyond the surface.","The novel explores profound questions about identity.","गहन"],
-["Sporadic","/spəˈrædɪk/ · adjective","Occurring irregularly or occasionally.","Not steady; appearing here and there.","Sporadic rainfall affected the harvest.","छिटपुट"],
-["Transient","/ˈtrænziənt/ · adjective","Lasting only for a short time.","Something passing through.","The excitement proved transient.","क्षणिक"],
-["Perpetual","/pəˈpetʃuəl/ · adjective","Continuing indefinitely or occurring repeatedly.","A cycle that seems never-ending.","The city exists in a state of perpetual change.","निरंतर"],
-["Pristine","/ˈprɪstiːn/ · adjective","In its original, untouched or unspoiled condition.","Perfectly untouched.","The researchers found a pristine stretch of forest.","अछूता"],
-["Obsolete","/ˈɒbsəliːt/ · adjective","No longer used because something newer has replaced it.","Old technology left behind.","The new system made several procedures obsolete.","अप्रचलित"],
-["Anachronism","/əˈnækrənɪzəm/ · noun","Something placed in the wrong historical period.","A modern object in an ancient setting.","The wristwatch in the historical film was an anachronism.","कालविपर्यय"],
-["Hegemony","/hɪˈdʒeməni/ · noun","Dominance or leadership of one group over others.","One group sets the rules for everyone.","The essay examines cultural hegemony in global media.","वर्चस्व"],
-["Egalitarian","/ɪˌɡælɪˈteəriən/ · adjective","Believing in equality among people.","Equal treatment for everyone.","The movement advocated an egalitarian society.","समतावादी"],
-["Orthodoxy","/ˈɔːθədɒksi/ · noun","Established beliefs or accepted conventional doctrine.","The accepted way of thinking.","The scientist challenged the orthodoxy of the time.","रूढ़ मान्यता"],
-["Ideology","/ˌaɪdiˈɒlədʒi/ · noun","A system of ideas and beliefs, especially about society or politics.","A framework of beliefs.","The passage critiques the ideology underlying consumerism.","विचारधारा"],
-["Existential","/ˌeɡzɪˈstenʃəl/ · adjective","Relating to existence, identity or the meaning of life.","Questions about why we exist.","The novel raises existential questions about freedom.","अस्तित्वगत"],
-["Nihilism","/ˈnaɪɪlɪzəm/ · noun","The belief that life or values have no inherent meaning.","Nothing has inherent meaning.","The philosopher explores nihilism and the loss of certainty.","शून्यवाद"],
-["Zeitgeist","/ˈzaɪtɡaɪst/ · noun","The defining spirit or mood of a particular historical period.","The spirit of the times.","The film captures the zeitgeist of the early internet age.","युगचेतना"],
-["Aesthetic","/esˈθetɪk/ · noun/adjective","Relating to beauty, appearance or artistic taste.","How something looks and feels.","The building's aesthetic reflects its cultural history.","सौंदर्यबोध"],
-["Catharsis","/kəˈθɑːsɪs/ · noun","Emotional release through art or experience.","A release of pent-up emotions.","The tragic ending provides a sense of catharsis.","भावनात्मक शुद्धि"],
-["Melancholy","/ˈmelənkɒli/ · noun/adjective","A quiet, thoughtful sadness.","A lingering, gentle sadness.","The poem is filled with melancholy and nostalgia.","विषाद"],
-["Nostalgia","/nɒˈstældʒə/ · noun","A sentimental longing for the past.","Missing an earlier time.","The old photograph filled her with nostalgia.","अतीत की मधुर स्मृति"],
-["Stoic","/ˈstəʊɪk/ · adjective","Enduring hardship without showing much emotion.","Calm in the face of difficulty.","He remained stoic despite the criticism.","धैर्यवान"],
-["Metaphor","/ˈmetəfə/ · noun","A figure of speech that describes one thing as another.","An imaginative comparison.","The author uses the journey as a metaphor for personal growth.","रूपक"],
-["Irony","/ˈaɪrəni/ · noun","A contrast between what is expected and what actually happens or is meant.","The opposite of what you expect.","The irony is that technology meant to save time often consumes it.","विडंबना"],
-["Satire","/ˈsætaɪə/ · noun","The use of humour, irony or exaggeration to criticise flaws.","Humour with a critical purpose.","The novel uses satire to expose political hypocrisy.","व्यंग्य"],
-["Hypocrisy","/hɪˈpɒkrəsi/ · noun","Claiming to have beliefs or standards that one's actions contradict.","Saying one thing and doing another.","The author exposes the hypocrisy of the institution.","पाखंड"],
-["Integrity","/ɪnˈteɡrəti/ · noun","Honesty and strong moral principles.","Doing the right thing even when unseen.","Academic integrity requires honest attribution of sources.","नैतिक दृढ़ता"],
-["Impartial","/ɪmˈpɑːʃəl/ · adjective","Fair and not favouring one side.","No partiality towards either side.","A judge must remain impartial.","निष्पक्ष"],
-["Discerning","/dɪˈsɜːnɪŋ/ · adjective","Showing good judgement and the ability to recognise subtle differences.","A person who can distinguish quality.","A discerning reader notices the assumptions behind an argument.","विवेकशील"],
-["Plausible","/ˈplɔːzəbl/ · adjective","Seeming reasonable or likely to be true.","Sounds believable, but may not be proven.","The author offers a plausible explanation for the trend.","विश्वसनीय"],
-["Tenacious","/təˈneɪʃəs/ · adjective","Persistent and determined; unwilling to give up.","Holding on firmly to a goal.","Her tenacious approach helped her complete the research.","दृढ़ निश्चयी"],
-["Diligent","/ˈdɪlɪdʒənt/ · adjective","Showing careful and persistent effort.","Consistent effort with care.","Diligent preparation is more effective than last-minute revision.","परिश्रमी"],
-["Ostensible","/ɒˈstensəbl/ · adjective","Appearing or stated to be true, though possibly not the real reason.","The outward explanation.","The ostensible reason for the policy was public safety.","कथित"],
-["Insidious","/ɪnˈsɪdiəs/ · adjective","Proceeding gradually and subtly with harmful effects.","A danger that grows quietly.","The author warns of the insidious effects of misinformation.","कपटी"],
-["Contentious","/kənˈtenʃəs/ · adjective","Causing or likely to cause disagreement.","A topic people argue about.","The proposal remains contentious among scholars.","विवादास्पद"],
-["Polemical","/pəˈlemɪkəl/ · adjective","Strongly critical or argumentative.","Writing designed to attack an opposing view.","The article adopts a polemical tone towards modern institutions.","विवादात्मक"],
-["Didactic","/daɪˈdæktɪk/ · adjective","Intended to teach or instruct, sometimes too obviously.","A lesson-first approach.","The novel has a didactic tone that some readers may dislike.","उपदेशात्मक"],
-["Dispassionate","/dɪsˈpæʃənət/ · adjective","Not influenced by strong emotions; calm and objective.","Without emotional involvement.","The report offers a dispassionate analysis of the conflict.","निष्पक्ष"],
-["Redress","/rɪˈdres/ · noun/verb","A remedy or compensation for a wrong or injustice.","Set something wrong right.","The citizens demanded redress for the injustice.","क्षतिपूर्ति"],
-["Rescind","/rɪˈsɪnd/ · verb","To revoke, cancel or officially withdraw a decision or law.","Take a decision back.","The committee decided to rescind the controversial rule.","रद्द करना"],
-["Exonerate","/ɪɡˈzɒnəreɪt/ · verb","To officially clear someone from blame or wrongdoing.","Remove the burden of blame.","The new evidence helped exonerate the accused.","दोषमुक्त करना"],
-["Disseminate","/dɪˈsemɪneɪt/ · verb","To spread information, ideas or knowledge widely.","Scatter seeds of information.","The organisation disseminates research to the public.","प्रसारित करना"],
-["Ameliorate","/əˈmiːliəreɪt/ · verb","To make a bad situation better.","Improve a difficult condition.","The reforms aim to ameliorate working conditions.","सुधारना"],
-["Bolster","/ˈbəʊlstə/ · verb","To support, strengthen or reinforce.","Add support to something weak.","The additional data bolstered the researcher's argument.","मज़बूत करना"],
-["Demeanour","/dɪˈmiːnə/ · noun","A person's outward behaviour or manner.","How someone carries themselves.","Her calm demeanour reassured the audience.","आचरण"],
-["Conundrum","/kəˈnʌndrəm/ · noun","A confusing and difficult problem or question.","A puzzle that needs solving.","The passage presents a conundrum about individual freedom.","पहेली"],
-["Caveat","/ˈkæviæt/ · noun","A warning or qualification attached to a statement.","A small but important warning.","The author supports the proposal, with one important caveat.","चेतावनी"],
-["Corollary","/kəˈrɒləri/ · noun","A result or consequence that follows naturally from something.","A logical follow-on.","Greater access to information is a corollary of digital expansion.","स्वाभाविक परिणाम"],
-["Incongruous","/ɪnˈkɒŋɡruəs/ · adjective","Not fitting or appropriate in a particular situation.","Something that looks out of place.","The cheerful music seemed incongruous with the sombre scene.","बेमेल"],
-["Inscrutable","/ɪnˈskruːtəbl/ · adjective","Difficult to understand, interpret or read.","A face that reveals nothing.","The author's intentions remain inscrutable.","अगम्य"],
-["Magnanimous","/mæɡˈnænɪməs/ · adjective","Generous and forgiving, especially towards a rival.","A large-hearted response.","She was magnanimous in victory and praised her opponent.","उदारहृदय"],
-["Reticent","/ˈretɪsənt/ · adjective","Not revealing thoughts or feelings readily.","Reserved rather than talkative.","The witness remained reticent about the incident.","मितभाषी"],
-["Tacit","/ˈtæsɪt/ · adjective","Understood or implied without being directly expressed.","An unspoken agreement.","There was a tacit understanding between the two colleagues.","मौन स्वीकृति"],
-["Vociferous","/vəˈsɪfərəs/ · adjective","Expressing opinions loudly and forcefully.","A voice that demands attention.","Vociferous critics opposed the proposed changes.","मुखर"],
-["Equivocal","/ɪˈkwɪvəkəl/ · adjective","Open to more than one interpretation; deliberately unclear.","An answer that avoids choosing a side.","The politician gave an equivocal response.","अस्पष्ट"],
-["Intransigent","/ɪnˈtrænsɪdʒənt/ · adjective","Unwilling to change one's views or compromise.","A position that cannot be shifted.","The negotiations failed because both sides remained intransigent.","अड़ियल"],
-["Reproach","/rɪˈprəʊtʃ/ · noun/verb","To express disappointment or criticism.","A verbal expression of disapproval.","The author reproaches society for neglecting the vulnerable.","भर्त्सना"],
-["Retrospective","/ˌretrəˈspektɪv/ · adjective/noun","Looking back at or dealing with the past.","Reviewing what has already happened.","In retrospect, the decision seems less reasonable.","पूर्वव्यापी"],
-["Proliferate","/prəˈlɪfəreɪt/ · verb","To increase rapidly in number or spread.","One becomes many, very quickly.","Online platforms have proliferated over the last decade.","तेजी से फैलना"],
-["Amorphous","/əˈmɔːfəs/ · adjective","Without a clear shape, structure or organisation.","A form without a fixed form.","The movement began as an amorphous collection of ideas.","आकारहीन"],
-["Esoteric","/ˌesəˈterɪk/ · adjective","Intended for or understood by a small group with specialised knowledge.","Knowledge for insiders.","The lecture was filled with esoteric references.","गूढ़"],
-["Prerogative","/prɪˈrɒɡətɪv/ · noun","A right or privilege belonging to a particular person or group.","A special right to decide.","It is the editor's prerogative to select the final articles.","विशेषाधिकार"],
-["Immutable","/ɪˈmjuːtəbl/ · adjective","Unchanging and unable to be altered.","Cannot be changed.","The author rejects the idea that social identities are immutable.","अपरिवर्तनीय"],
-["Mutable","/ˈmjuːtəbl/ · adjective","Capable of changing.","The opposite of immutable.","Language is mutable and evolves over time.","परिवर्तनशील"],
-["Prosaic","/prəˈzeɪɪk/ · adjective","Ordinary, commonplace or lacking imagination.","Plain and everyday.","The author transforms a prosaic subject into an engaging discussion.","साधारण"],
-["Quintessential","/ˌkwɪntɪˈsenʃəl/ · adjective","Representing the most perfect or typical example of something.","The purest example of a category.","The novel is a quintessential example of modernist literature.","सर्वोत्कृष्ट"],
-["Salient","/ˈseɪliənt/ · adjective","Most noticeable or important.","The point that stands out.","The passage's salient argument concerns the limits of progress.","प्रमुख"],
-["Specious","/ˈspiːʃəs/ · adjective","Seemingly reasonable or true but actually misleading.","Looks convincing, but is false.","The author rejects the specious claim that wealth guarantees happiness.","भ्रामक"],
-["Tenuous","/ˈtenjuəs/ · adjective","Very weak, slight or uncertain.","A thin thread of evidence.","The connection between the two events is tenuous.","कमज़ोर"],
-["Vehement","/ˈviːəmənt/ · adjective","Showing strong feeling or forceful conviction.","An argument delivered with intensity.","The proposal faced vehement opposition.","प्रबल"],
-["Wary","/ˈweəri/ · adjective","Cautious because of possible danger or problems.","Watchful and careful.","Readers should be wary of unsupported generalisations.","सतर्क"],
-["Austere","/ɒˈstɪə/ · adjective","Severe, plain or without luxury.","Simple and stripped of excess.","The building's austere design reflects the architect's philosophy.","सादा"],
-["Deference","/ˈdefərəns/ · noun","Respectful submission to another person's judgement or authority.","Showing respect to someone else's position.","The junior researcher spoke with deference to her mentor.","आदर"],
-["Disparity","/dɪˈspærəti/ · noun","A great difference or inequality.","A gap between two things.","The report highlights the disparity in educational access.","असमानता"],
-["Enigmatic","/ˌenɪɡˈmætɪk/ · adjective","Mysterious and difficult to interpret.","Like a riddle.","The author's enigmatic conclusion leaves several questions unanswered.","रहस्यमय"],
-["Futile","/ˈfjuːtaɪl/ · adjective","Having no useful result; pointless.","Effort without outcome.","The author argues that censorship is futile in the digital age.","व्यर्थ"],
-["Impetus","/ˈɪmpɪtəs/ · noun","A force or stimulus that makes something happen.","The push that starts movement.","The crisis provided the impetus for institutional reform.","प्रेरणा"],
-["Onerous","/ˈəʊnərəs/ · adjective","Involving a great deal of effort or difficulty.","A heavy burden.","The new regulations placed an onerous burden on small businesses.","कठिन"],
-["Recalcitrant","/rɪˈkælsɪtrənt/ · adjective","Resistant to authority or control; stubbornly uncooperative.","Refusing to follow instructions.","The recalcitrant group refused to accept the proposed settlement.","अवज्ञाकारी"],
-["Sanguine","/ˈsæŋɡwɪn/ · adjective","Optimistic or positive, especially in a difficult situation.","A hopeful outlook.","Despite the setbacks, the team remained sanguine about the future.","आशावादी"],
-["Trivial","/ˈtrɪviəl/ · adjective","Of little importance or value.","A small matter.","The author argues that the distinction is not trivial.","तुच्छ"],
-["Vindicate","/ˈvɪndɪkeɪt/ · verb","To clear someone of blame or prove that they were right.","Show that someone was justified.","The final results vindicated the researcher's original hypothesis.","सही साबित करना"],
-["Whimsical","/ˈwɪmzɪkəl/ · adjective","Playfully unusual or fanciful.","A playful imagination.","The author uses whimsical imagery to soften a serious argument.","कल्पनाशील"],
-["Zealous","/ˈzeləs/ · adjective","Showing great energy and enthusiasm for a cause.","Passionate commitment.","The zealous campaigners worked tirelessly for reform.","उत्साही"]
+const words=[
+["Epiphany","/ɪˈpɪfəni/ · noun","A sudden, profound realisation or moment of clarity.","Imagine a light suddenly switching on in your mind.","The passage led me to an epiphany about human ambition.","अचानक बोध · गहरी अनुभूति","Realisation, revelation, insight","Confusion, ignorance"],
+["Epistemology","/ɪˌpɪstəˈmɒlədʒi/ · noun","The branch of philosophy concerned with knowledge and how we know things.","Episteme = knowledge; -ology = study.","The author questions the epistemology behind scientific certainty.","ज्ञानमीमांसा","Theory of knowledge","—"],
+["Paradigm","/ˈpærədaɪm/ · noun","A model, framework or typical way of understanding something.","Think of it as the lens through which you see the world.","The discovery caused a paradigm shift in medical research.","प्रतिमान · विचार ढाँचा","Model, framework, pattern","—"],
+["Nuance","/ˈnjuːɑːns/ · noun","A subtle distinction or shade of meaning.","A tiny difference that changes the whole picture.","A good reader notices the nuances in the author's argument.","सूक्ष्म अंतर · बारीकी","Subtlety, distinction, shade","Obviousness, bluntness"],
+["Obscure","/əbˈskjʊə/ · adjective","Not clear, well known or easily understood.","Something hidden in the shadows.","The author makes an obscure reference to ancient philosophy.","अस्पष्ट · अज्ञात","Vague, unclear, ambiguous","Clear, evident, explicit"],
+["Pragmatic","/præɡˈmætɪk/ · adjective","Dealing with situations practically rather than theoretically.","Practical before perfect.","We need a pragmatic solution rather than an idealistic proposal.","व्यावहारिक","Practical, realistic, sensible","Idealistic, impractical"],
+["Ambivalent","/æmˈbɪvələnt/ · adjective","Having mixed or conflicting feelings about something.","Ambi = both; valence = feeling.","She remained ambivalent about accepting the offer.","दुविधाग्रस्त","Conflicted, uncertain, torn","Certain, decisive"],
+["Altruistic","/ˌæltruˈɪstɪk/ · adjective","Showing selfless concern for others.","Helping others without expecting a return.","His altruistic actions benefited the entire community.","परोपकारी · निःस्वार्थ","Selfless, charitable, benevolent","Selfish, egoistic"],
+["Apathetic","/ˌæpəˈθetɪk/ · adjective","Showing little interest, enthusiasm or concern.","A = without; pathos = feeling.","Voters became apathetic towards the repeated political promises.","उदासीन · निरुत्साही","Indifferent, unconcerned, detached","Enthusiastic, passionate"],
+["Empirical","/ɪmˈpɪrɪkəl/ · adjective","Based on observation, experience or evidence rather than theory alone.","Evidence you can observe or test.","The claim requires empirical evidence.","अनुभवजन्य · प्रमाण आधारित","Evidence-based, observational","Theoretical, speculative"],
+["Dichotomy","/daɪˈkɒtəmi/ · noun","A division into two contrasting or opposing parts.","Di = two; think of two opposite sides.","The essay challenges the dichotomy between nature and culture.","द्वैत · द्विभाजन","Division, contrast, polarity","Unity, continuum"],
+["Paradox","/ˈpærədɒks/ · noun","A statement or situation that seems contradictory but may reveal a truth.","An apparent contradiction with a hidden insight.","It is a paradox that greater connectivity can produce loneliness.","विरोधाभास","Contradiction, anomaly, puzzle","Consistency, coherence"],
+["Conjecture","/kənˈdʒektʃə/ · noun","An opinion or conclusion based on incomplete information.","A guess that still needs proof.","Without sufficient evidence, the theory remains conjecture.","अनुमान · अटकल","Speculation, hypothesis, guess","Fact, certainty, proof"],
+["Inference","/ˈɪnfərəns/ · noun","A conclusion reached from evidence and reasoning.","Read between the lines.","The reader can draw an inference from the author's final paragraph.","निष्कर्ष · अनुमान","Deduction, conclusion, implication","Observation, premise"],
+["Premise","/ˈpremɪs/ · noun","A proposition or assumption on which an argument is based.","The foundation of an argument.","The entire argument rests on a questionable premise.","आधारभूत धारणा","Assumption, proposition, basis","Conclusion, outcome"],
+["Fallacy","/ˈfæləsi/ · noun","A mistaken belief or error in reasoning.","A false logic trap.","The author exposes the fallacy in assuming correlation means causation.","तर्कदोष · मिथ्या तर्क","Misconception, false reasoning","Valid reasoning, sound logic"],
+["Rhetoric","/ˈretərɪk/ · noun","The art of persuasive or effective speaking and writing.","Words designed to persuade.","His rhetoric was powerful, but his argument lacked evidence.","वाक्पटुता · प्रभावशाली भाषा","Persuasion, oratory, eloquence","Plainness, simplicity"],
+["Implicit","/ɪmˈplɪsɪt/ · adjective","Suggested or understood without being directly stated.","It is inside the message, not explicitly written.","There is an implicit criticism of consumer culture in the passage.","निहित · अप्रत्यक्ष","Implied, indirect, suggested","Explicit, direct, stated"],
+["Explicit","/ɪkˈsplɪsɪt/ · adjective","Stated clearly and directly.","Expressed openly.","The author makes an explicit distinction between the two theories.","स्पष्ट · प्रत्यक्ष","Direct, definite, unambiguous","Implicit, indirect, obscure"],
+["Scrutinise","/ˈskruːtɪnaɪz/ · verb","To examine something very carefully and critically.","A scrutiny lens that checks every detail.","Researchers must scrutinise the data before drawing conclusions.","बारीकी से जाँचना","Examine, inspect, investigate","Overlook, ignore"],
+["Substantiate","/səbˈstænʃieɪt/ · verb","To support a claim with evidence.","Give substance to an argument.","The researcher could not substantiate the allegation.","प्रमाणित करना · पुष्टि करना","Verify, corroborate, validate","Refute, disprove"],
+["Undermine","/ˌʌndəˈmaɪn/ · verb","To weaken or damage gradually.","Imagine removing the foundation beneath a building.","The new evidence undermines the author's central claim.","कमज़ोर करना","Weaken, erode, sabotage","Strengthen, reinforce"],
+["Reconcile","/ˈrekənsaɪl/ · verb","To make two conflicting ideas or situations compatible.","Bring opposing sides together.","The philosopher attempts to reconcile freedom with social responsibility.","मेल कराना · सामंजस्य बैठाना","Resolve, harmonise, settle","Alienate, divide"],
+["Coherent","/kəʊˈhɪərənt/ · adjective","Logical, consistent and easy to understand.","Ideas that hold together.","The essay presents a coherent argument from beginning to end.","सुसंगत · तार्किक","Logical, consistent, connected","Incoherent, contradictory"],
+["Ambiguous","/æmˈbɪɡjuəs/ · adjective","Having more than one possible meaning or interpretation.","An ambiguous sentence has multiple readings.","The wording of the question was deliberately ambiguous.","अस्पष्ट · द्विअर्थी","Vague, equivocal, uncertain","Clear, definite, explicit"],
+["Arbitrary","/ˈɑːbɪtrəri/ · adjective","Based on random choice or personal preference rather than reason.","A decision without a fair rule.","The division appears arbitrary rather than scientifically justified.","मनमाना","Random, capricious, unreasoned","Reasoned, systematic"],
+["Dogmatic","/dɒɡˈmætɪk/ · adjective","Insisting that beliefs are unquestionably correct.","Refusing to consider alternatives.","The author criticises dogmatic approaches to education.","हठधर्मी · कट्टर","Rigid, opinionated, inflexible","Open-minded, flexible"],
+["Sceptical","/ˈskeptɪkəl/ · adjective","Not easily convinced; inclined to question claims.","A healthy 'show me the evidence' attitude.","Readers should remain sceptical of sweeping generalisations.","संदेहशील","Doubtful, questioning, unconvinced","Trusting, convinced"],
+["Cynical","/ˈsɪnɪkəl/ · adjective","Believing that people are mainly motivated by self-interest.","Assuming a selfish motive behind everything.","His cynical view of politics made him distrust every promise.","निंदक · संशयी","Distrustful, pessimistic, sceptical","Trusting, idealistic"],
+["Ubiquitous","/juːˈbɪkwɪtəs/ · adjective","Present or found everywhere.","Everywhere you go, it is there.","Smartphones have become ubiquitous in modern society.","सर्वव्यापी · सर्वत्र उपस्थित","Omnipresent, pervasive, widespread","Rare, scarce"],
+["Eloquent","/ˈeləkwənt/ · adjective","Fluent, persuasive and expressive in speech or writing.","Words that flow with impact.","Her eloquent response changed the tone of the debate.","वाक्पटु · प्रभावशाली वक्ता","Articulate, expressive, persuasive","Inarticulate, hesitant"],
+["Articulate","/ɑːˈtɪkjələt/ · adjective/verb","Able to express ideas clearly.","Put your thoughts into clear words.","He articulated a complex idea in simple language.","स्पष्ट रूप से व्यक्त करना","Eloquent, expressive, fluent","Inarticulate, unclear"],
+["Meticulous","/məˈtɪkjələs/ · adjective","Extremely careful and attentive to detail.","A person who notices even tiny details.","The editor was meticulous about every citation.","अत्यंत सावधान · सूक्ष्मदर्शी","Thorough, precise, painstaking","Careless, negligent"],
+["Resilient","/rɪˈzɪliənt/ · adjective","Able to recover quickly from difficulty or change.","Like a spring that returns to its shape.","Resilient communities adapt after economic shocks.","लचीला · कठिनाइयों से उबरने वाला","Adaptable, hardy, robust","Fragile, vulnerable"],
+["Inherent","/ɪnˈhɪərənt/ · adjective","Existing as a natural or essential part of something.","Built into its nature.","Risk is inherent in every major investment.","अंतर्निहित · स्वाभाविक","Intrinsic, innate, essential","Acquired, external"],
+["Intrinsic","/ɪnˈtrɪnzɪk/ · adjective","Belonging naturally to the essential nature of something.","Value from within.","Curiosity has intrinsic value in the learning process.","आंतरिक · स्वाभाविक","Inherent, innate, essential","Extrinsic, external"],
+["Extrinsic","/ɪkˈstrɪnzɪk/ · adjective","Coming from outside rather than the essential nature of something.","External rewards or pressures.","Extrinsic rewards may not sustain long-term motivation.","बाहरी · बाह्य","External, outward, additional","Intrinsic, inherent"],
+["Inevitable","/ɪnˈevɪtəbl/ · adjective","Certain to happen; impossible to avoid.","Cannot be avoided.","Technological change is not always inevitable in its consequences.","अपरिहार्य · अनिवार्य","Unavoidable, certain, inescapable","Avoidable, preventable"],
+["Pervasive","/pəˈveɪsɪv/ · adjective","Spreading widely throughout an area or group.","A problem that seeps everywhere.","The passage examines the pervasive influence of advertising.","व्यापक · सर्वव्यापी","Widespread, prevalent, ubiquitous","Limited, confined"],
+["Egregious","/ɪˈɡriːdʒəs/ · adjective","Outstandingly bad or shocking.","A mistake so bad that it stands out.","The report exposed egregious violations of public trust.","घोर · अत्यंत गंभीर","Outrageous, glaring, appalling","Minor, trivial"],
+["Benevolent","/bəˈnevələnt/ · adjective","Well meaning and kindly.","Bene = good; wishing good for others.","The benevolent organisation funded rural education.","परोपकारी · दयालु","Kind, charitable, generous","Malevolent, cruel"],
+["Malevolent","/məˈlevələnt/ · adjective","Having or showing a desire to cause harm.","Harmful intentions.","The novel portrays a malevolent ruler.","दुर्भावनापूर्ण · दुष्ट","Malicious, hostile, harmful","Benevolent, benevolent"],
+["Prudent","/ˈpruːdnt/ · adjective","Acting with care and good judgement.","Pause and think before acting.","It would be prudent to examine the risks first.","विवेकपूर्ण · समझदार","Wise, cautious, judicious","Reckless, imprudent"],
+["Candid","/ˈkændɪd/ · adjective","Honest, direct and sincere.","A candid answer does not hide the truth.","She gave a candid assessment of the project.","स्पष्टवादी · निष्कपट","Frank, honest, straightforward","Deceptive, guarded"],
+["Lucid","/ˈluːsɪd/ · adjective","Clear and easy to understand.","A lucid explanation clears confusion.","The professor offered a lucid account of the theory.","सुबोध · स्पष्ट","Clear, intelligible, coherent","Confusing, obscure"],
+["Concise","/kənˈsaɪs/ · adjective","Brief but containing all necessary information.","Cut the excess, keep the essence.","A concise summary captures the author's central argument.","संक्षिप्त · सारगर्भित","Brief, succinct, terse","Verbose, wordy"],
+["Verbose","/vɜːˈbəʊs/ · adjective","Using more words than necessary.","Too many words for a simple point.","The essay is verbose and could be more focused.","शब्दाडंबरपूर्ण · बहुत शब्दों वाला","Wordy, prolix, long-winded","Concise, succinct"],
+["Redundant","/rɪˈdʌndənt/ · adjective","Unnecessary because it is repeated or no longer useful.","Something extra that adds no value.","The final paragraph is redundant because it repeats the introduction.","अनावश्यक · निरर्थक","Superfluous, repetitive, needless","Essential, necessary"],
+["Discrepancy","/dɪˈskrepənsi/ · noun","A difference or inconsistency between things that should agree.","A gap between two accounts.","The audit revealed a discrepancy in the financial records.","विसंगति · अंतर","Inconsistency, disparity, deviation","Agreement, consistency"],
+["Corroborate","/kəˈrɒbəreɪt/ · verb","To confirm or support a statement with additional evidence.","An independent source backs you up.","The second study corroborated the original findings.","पुष्टि करना · प्रमाणित करना","Confirm, substantiate, verify","Contradict, refute"],
+["Delineate","/dɪˈlɪnieɪt/ · verb","To describe or define something precisely.","Draw the boundaries clearly.","The author delineates the limits of the proposed theory.","रेखांकित करना · स्पष्ट परिभाषित करना","Define, outline, describe","Blur, obscure"],
+["Elucidate","/ɪˈluːsɪdeɪt/ · verb","To make something clear or easier to understand.","Illuminate an idea.","The example helps elucidate the author's position.","स्पष्ट करना · समझाना","Explain, clarify, illuminate","Obscure, confuse"],
+["Exacerbate","/ɪɡˈzæsəbeɪt/ · verb","To make a problem or negative situation worse.","A problem gets extra bad.","Poor planning can exacerbate an existing crisis.","और बिगाड़ना · गंभीर करना","Aggravate, intensify, worsen","Alleviate, mitigate"],
+["Mitigate","/ˈmɪtɪɡeɪt/ · verb","To make something less severe, harmful or painful.","Reduce the intensity of a problem.","New policies may mitigate the effects of inequality.","प्रभाव घटाना · कम करना","Alleviate, lessen, ease","Exacerbate, intensify"],
+["Precarious","/prɪˈkeəriəs/ · adjective","Uncertain, unstable or dangerously insecure.","Standing on a shaky edge.","The workers faced precarious employment conditions.","अस्थिर · जोखिमपूर्ण","Unstable, uncertain, risky","Secure, stable"],
+["Superficial","/ˌsuːpəˈfɪʃəl/ · adjective","Concerned only with the surface; lacking depth.","Surface-level understanding.","The article offers a superficial treatment of a complex issue.","सतही · उथला","Shallow, cursory, skin-deep","Profound, thorough"],
+["Profound","/prəˈfaʊnd/ · adjective","Very deep, intense or far-reaching.","A thought that goes beyond the surface.","The novel explores profound questions about identity.","गहन · गहरा","Deep, significant, insightful","Superficial, trivial"],
+["Sporadic","/spəˈrædɪk/ · adjective","Occurring irregularly or occasionally.","Not steady; appearing here and there.","Sporadic rainfall affected the harvest.","छिटपुट · अनियमित","Occasional, intermittent, irregular","Constant, continuous"],
+["Transient","/ˈtrænziənt/ · adjective","Lasting only for a short time.","Something passing through.","The excitement proved transient.","क्षणिक · अस्थायी","Temporary, fleeting, brief","Permanent, enduring"],
+["Perpetual","/pəˈpetʃuəl/ · adjective","Continuing indefinitely or occurring repeatedly.","A cycle that seems never-ending.","The city exists in a state of perpetual change.","निरंतर · शाश्वत","Constant, continual, everlasting","Temporary, intermittent"],
+["Pristine","/ˈprɪstiːn/ · adjective","In its original, untouched or unspoiled condition.","Perfectly untouched.","The researchers found a pristine stretch of forest.","अछूता · निर्मल","Untouched, immaculate, unspoiled","Damaged, polluted"],
+["Obsolete","/ˈɒbsəliːt/ · adjective","No longer used because something newer has replaced it.","Old technology left behind.","The new system made several procedures obsolete.","अप्रचलित · पुराना","Outdated, antiquated, superseded","Modern, current"],
+["Anachronism","/əˈnækrənɪzəm/ · noun","Something placed in the wrong historical period.","A modern object in an ancient setting.","The wristwatch in the historical film was an anachronism.","कालविपर्यय · समय-विसंगति","Misplacement, chronological error","—"],
+["Hegemony","/hɪˈdʒeməni/ · noun","Dominance or leadership of one group over others.","One group sets the rules for everyone.","The essay examines cultural hegemony in global media.","वर्चस्व · प्रभुत्व","Dominance, supremacy, authority","Equality, subordination"],
+["Egalitarian","/ɪˌɡælɪˈteəriən/ · adjective","Believing in equality among people.","Equal treatment for everyone.","The movement advocated an egalitarian society.","समतावादी · समानतावादी","Equal, democratic, level","Hierarchical, elitist"],
+["Orthodoxy","/ˈɔːθədɒksi/ · noun","Established beliefs or accepted conventional doctrine.","The accepted way of thinking.","The scientist challenged the orthodoxy of the time.","रूढ़ मान्यता · परंपरागत विचार","Convention, tradition, doctrine","Unorthodoxy, dissent"],
+["Ideology","/ˌaɪdiˈɒlədʒi/ · noun","A system of ideas and beliefs, especially about society or politics.","A framework of beliefs.","The passage critiques the ideology underlying consumerism.","विचारधारा","Doctrine, philosophy, belief system","Pragmatism"],
+["Existential","/ˌeɡzɪˈstenʃəl/ · adjective","Relating to existence, identity or the meaning of life.","Questions about why we exist.","The novel raises existential questions about freedom.","अस्तित्वगत","Fundamental, ontological","—"],
+["Nihilism","/ˈnaɪɪlɪzəm/ · noun","The belief that life or values have no inherent meaning.","Nothing has inherent meaning.","The philosopher explores nihilism and the loss of certainty.","शून्यवाद","Negation, meaninglessness","Idealism, affirmation"],
+["Zeitgeist","/ˈzaɪtɡaɪst/ · noun","The defining spirit or mood of a particular historical period.","The spirit of the times.","The film captures the zeitgeist of the early internet age.","युगचेतना · समय की भावना","Spirit of the age, cultural mood","—"],
+["Aesthetic","/esˈθetɪk/ · noun/adjective","Relating to beauty, appearance or artistic taste.","How something looks and feels.","The building's aesthetic reflects its cultural history.","सौंदर्यबोध · कलात्मक","Artistic, visual, tasteful","Unaesthetic"],
+["Catharsis","/kəˈθɑːsɪs/ · noun","Emotional release through art or experience.","A release of pent-up emotions.","The tragic ending provides a sense of catharsis.","भावनात्मक शुद्धि · मनोविमोचन","Release, purification, relief","Suppression, repression"],
+["Melancholy","/ˈmelənkɒli/ · noun/adjective","A quiet, thoughtful sadness.","A lingering, gentle sadness.","The poem is filled with melancholy and nostalgia.","विषाद · उदासी","Sadness, gloom, sorrow","Cheerfulness, elation"],
+["Nostalgia","/nɒˈstældʒə/ · noun","A sentimental longing for the past.","Missing an earlier time.","The old photograph filled her with nostalgia.","अतीत की मधुर स्मृति","Longing, reminiscence, wistfulness","Forgetfulness"],
+["Stoic","/ˈstəʊɪk/ · adjective","Enduring hardship without showing much emotion.","Calm in the face of difficulty.","He remained stoic despite the criticism.","धैर्यवान · स्थितप्रज्ञ","Composed, unemotional, resilient","Emotional, excitable"],
+["Metaphor","/ˈmetəfə/ · noun","A figure of speech that describes one thing as another.","An imaginative comparison.","The author uses the journey as a metaphor for personal growth.","रूपक","Symbol, analogy, comparison","Literal statement"],
+["Irony","/ˈaɪrəni/ · noun","A contrast between what is expected and what actually happens or is meant.","The opposite of what you expect.","The irony is that technology meant to save time often consumes it.","विडंबना · व्यंग्यात्मक विरोधाभास","Sarcasm, incongruity, paradox","Sincerity, directness"],
+["Satire","/ˈsætaɪə/ · noun","The use of humour, irony or exaggeration to criticise flaws.","Humour with a critical purpose.","The novel uses satire to expose political hypocrisy.","व्यंग्य","Ridicule, mockery, parody","Praise, flattery"],
+["Hypocrisy","/hɪˈpɒkrəsi/ · noun","Claiming to have beliefs or standards that one's actions contradict.","Saying one thing and doing another.","The author exposes the hypocrisy of the institution.","पाखंड · कपट","Insincerity, pretence, duplicity","Integrity, sincerity"],
+["Integrity","/ɪnˈteɡrəti/ · noun","Honesty and strong moral principles.","Doing the right thing even when unseen.","Academic integrity requires honest attribution of sources.","नैतिक दृढ़ता · ईमानदारी","Honesty, morality, probity","Dishonesty, corruption"],
+["Impartial","/ɪmˈpɑːʃəl/ · adjective","Fair and not favouring one side.","No partiality towards either side.","A judge must remain impartial.","निष्पक्ष · तटस्थ","Neutral, unbiased, objective","Biased, partial"],
+["Discerning","/dɪˈsɜːnɪŋ/ · adjective","Showing good judgement and the ability to recognise subtle differences.","A person who can distinguish quality.","A discerning reader notices the assumptions behind an argument.","विवेकशील · पारखी","Perceptive, insightful, judicious","Uncritical, undiscerning"],
+["Plausible","/ˈplɔːzəbl/ · adjective","Seeming reasonable or likely to be true.","Sounds believable, but may not be proven.","The author offers a plausible explanation for the trend.","विश्वसनीय · संभाव्य","Credible, believable, probable","Implausible, unlikely"],
+["Tenacious","/təˈneɪʃəs/ · adjective","Persistent and determined; unwilling to give up.","Holding on firmly to a goal.","Her tenacious approach helped her complete the research.","दृढ़ निश्चयी · जुझारू","Persistent, determined, resolute","Fickle, irresolute"],
+["Diligent","/ˈdɪlɪdʒənt/ · adjective","Showing careful and persistent effort.","Consistent effort with care.","Diligent preparation is more effective than last-minute revision.","परिश्रमी · मेहनती","Hardworking, industrious, conscientious","Lazy, negligent"],
+["Ostensible","/ɒˈstensəbl/ · adjective","Appearing or stated to be true, though possibly not the real reason.","The outward explanation.","The ostensible reason for the policy was public safety.","कथित · प्रत्यक्ष दिखने वाला","Apparent, supposed, alleged","Actual, genuine"],
+["Insidious","/ɪnˈsɪdiəs/ · adjective","Proceeding gradually and subtly with harmful effects.","A danger that grows quietly.","The author warns of the insidious effects of misinformation.","कपटी · छिपकर हानि पहुँचाने वाला","Stealthy, subtle, treacherous","Open, harmless"],
+["Contentious","/kənˈtenʃəs/ · adjective","Causing or likely to cause disagreement.","A topic people argue about.","The proposal remains contentious among scholars.","विवादास्पद","Controversial, disputable, debatable","Uncontroversial, agreeable"],
+["Polemical","/pəˈlemɪkəl/ · adjective","Strongly critical or argumentative.","Writing designed to attack an opposing view.","The article adopts a polemical tone towards modern institutions.","विवादात्मक · आक्रामक आलोचनात्मक","Argumentative, combative, critical","Conciliatory, agreeable"],
+["Didactic","/daɪˈdæktɪk/ · adjective","Intended to teach or instruct, sometimes too obviously.","A lesson-first approach.","The novel has a didactic tone that some readers may dislike.","उपदेशात्मक · शिक्षाप्रद","Instructive, educational, pedagogical","Uninstructive, entertaining"],
+["Dispassionate","/dɪsˈpæʃənət/ · adjective","Not influenced by strong emotions; calm and objective.","Without emotional involvement.","The report offers a dispassionate analysis of the conflict.","निष्पक्ष · भावनारहित","Objective, impartial, detached","Emotional, biased"],
+["Redress","/rɪˈdres/ · noun/verb","A remedy or compensation for a wrong or injustice.","Set something wrong right.","The citizens demanded redress for the injustice.","क्षतिपूर्ति · सुधार","Remedy, restitution, compensation","Injustice, harm"],
+["Rescind","/rɪˈsɪnd/ · verb","To revoke, cancel or officially withdraw a decision or law.","Take a decision back.","The committee decided to rescind the controversial rule.","रद्द करना · वापस लेना","Revoke, repeal, annul","Enact, uphold"],
+["Exonerate","/ɪɡˈzɒnəreɪt/ · verb","To officially clear someone from blame or wrongdoing.","Remove the burden of blame.","The new evidence helped exonerate the accused.","दोषमुक्त करना","Acquit, absolve, vindicate","Incriminate, condemn"],
+["Disseminate","/dɪˈsemɪneɪt/ · verb","To spread information, ideas or knowledge widely.","Scatter seeds of information.","The organisation disseminates research to the public.","प्रसारित करना · फैलाना","Distribute, circulate, spread","Conceal, suppress"],
+["Ameliorate","/əˈmiːliəreɪt/ · verb","To make a bad situation better.","Improve a difficult condition.","The reforms aim to ameliorate working conditions.","सुधारना · बेहतर बनाना","Improve, enhance, alleviate","Worsen, aggravate"],
+["Bolster","/ˈbəʊlstə/ · verb","To support, strengthen or reinforce.","Add support to something weak.","The additional data bolstered the researcher's argument.","मज़बूत करना · सहारा देना","Strengthen, reinforce, support","Weaken, undermine"],
+["Demeanour","/dɪˈmiːnə/ · noun","A person's outward behaviour or manner.","How someone carries themselves.","Her calm demeanour reassured the audience.","आचरण · व्यवहार","Conduct, manner, bearing","Misconduct"],
+["Conundrum","/kəˈnʌndrəm/ · noun","A confusing and difficult problem or question.","A puzzle that needs solving.","The passage presents a conundrum about individual freedom.","पहेली · कठिन समस्या","Puzzle, dilemma, enigma","Solution, answer"],
+["Caveat","/ˈkæviæt/ · noun","A warning or qualification attached to a statement.","A small but important warning.","The author supports the proposal, with one important caveat.","चेतावनी · शर्त","Qualification, warning, proviso","Endorsement, assurance"],
+["Corollary","/kəˈrɒləri/ · noun","A result or consequence that follows naturally from something.","A logical follow-on.","Greater access to information is a corollary of digital expansion.","स्वाभाविक परिणाम · निष्कर्ष","Consequence, outcome, implication","Cause, origin"],
+["Incongruous","/ɪnˈkɒŋɡruəs/ · adjective","Not fitting or appropriate in a particular situation.","Something that looks out of place.","The cheerful music seemed incongruous with the sombre scene.","बेमेल · असंगत","Inappropriate, inconsistent, incompatible","Congruous, fitting"],
+["Inscrutable","/ɪnˈskruːtəbl/ · adjective","Difficult to understand, interpret or read.","A face that reveals nothing.","The author's intentions remain inscrutable.","अगम्य · रहस्यमय","Mysterious, enigmatic, impenetrable","Transparent, comprehensible"],
+["Magnanimous","/mæɡˈnænɪməs/ · adjective","Generous and forgiving, especially towards a rival.","A large-hearted response.","She was magnanimous in victory and praised her opponent.","उदारहृदय · विशालहृदय","Generous, benevolent, forgiving","Petty, vindictive"],
+["Reticent","/ˈretɪsənt/ · adjective","Not revealing thoughts or feelings readily.","Reserved rather than talkative.","The witness remained reticent about the incident.","मितभाषी · संकोची","Reserved, restrained, uncommunicative","Outspoken, talkative"],
+["Tacit","/ˈtæsɪt/ · adjective","Understood or implied without being directly expressed.","An unspoken agreement.","There was a tacit understanding between the two colleagues.","मौन स्वीकृति · अव्यक्त","Implicit, unspoken, understood","Explicit, stated"],
+["Vociferous","/vəˈsɪfərəs/ · adjective","Expressing opinions loudly and forcefully.","A voice that demands attention.","Vociferous critics opposed the proposed changes.","मुखर · जोरदार","Loud, vehement, clamorous","Quiet, subdued"],
+["Equivocal","/ɪˈkwɪvəkəl/ · adjective","Open to more than one interpretation; deliberately unclear.","An answer that avoids choosing a side.","The politician gave an equivocal response.","अस्पष्ट · संदिग्ध","Ambiguous, vague, uncertain","Unequivocal, definite"],
+["Intransigent","/ɪnˈtrænsɪdʒənt/ · adjective","Unwilling to change one's views or compromise.","A position that cannot be shifted.","The negotiations failed because both sides remained intransigent.","अड़ियल · हठी","Obstinate, inflexible, uncompromising","Flexible, accommodating"],
+["Reproach","/rɪˈprəʊtʃ/ · noun/verb","To express disappointment or criticism.","A verbal expression of disapproval.","The author reproaches society for neglecting the vulnerable.","भर्त्सना · निंदा","Rebuke, reprimand, censure","Praise, commendation"],
+["Retrospective","/ˌretrəˈspektɪv/ · adjective/noun","Looking back at or dealing with the past.","Reviewing what has already happened.","In retrospect, the decision seems less reasonable.","पूर्वव्यापी · अतीतावलोकन","Backward-looking, reflective, review","Prospective, forward-looking"],
+["Proliferate","/prəˈlɪfəreɪt/ · verb","To increase rapidly in number or spread.","One becomes many, very quickly.","Online platforms have proliferated over the last decade.","तेजी से फैलना · बढ़ना","Multiply, expand, mushroom","Dwindle, decline"],
+["Amorphous","/əˈmɔːfəs/ · adjective","Without a clear shape, structure or organisation.","A form without a fixed form.","The movement began as an amorphous collection of ideas.","आकारहीन · अनिश्चित","Formless, shapeless, undefined","Structured, defined"],
+["Esoteric","/ˌesəˈterɪk/ · adjective","Intended for or understood by a small group with specialised knowledge.","Knowledge for insiders.","The lecture was filled with esoteric references.","गूढ़ · रहस्यमय","Obscure, arcane, specialised","Common, accessible"],
+["Prerogative","/prɪˈrɒɡətɪv/ · noun","A right or privilege belonging to a particular person or group.","A special right to decide.","It is the editor's prerogative to select the final articles.","विशेषाधिकार","Privilege, entitlement, right","Obligation, duty"],
+["Immutable","/ɪˈmjuːtəbl/ · adjective","Unchanging and unable to be altered.","Cannot be changed.","The author rejects the idea that social identities are immutable.","अपरिवर्तनीय · अटल","Unchangeable, fixed, permanent","Mutable, changeable"],
+["Mutable","/ˈmjuːtəbl/ · adjective","Capable of changing.","The opposite of immutable.","Language is mutable and evolves over time.","परिवर्तनशील · बदलने योग्य","Changeable, adaptable, variable","Immutable, fixed"],
+["Prosaic","/prəˈzeɪɪk/ · adjective","Ordinary, commonplace or lacking imagination.","Plain and everyday.","The author transforms a prosaic subject into an engaging discussion.","साधारण · नीरस","Ordinary, mundane, commonplace","Imaginative, extraordinary"],
+["Quintessential","/ˌkwɪntɪˈsenʃəl/ · adjective","Representing the most perfect or typical example of something.","The purest example of a category.","The novel is a quintessential example of modernist literature.","सर्वोत्कृष्ट · आदर्श","Typical, exemplary, archetypal","Unrepresentative"],
+["Salient","/ˈseɪliənt/ · adjective","Most noticeable or important.","The point that stands out.","The passage's salient argument concerns the limits of progress.","प्रमुख · महत्वपूर्ण","Prominent, significant, noteworthy","Inconspicuous, insignificant"],
+["Specious","/ˈspiːʃəs/ · adjective","Seemingly reasonable or true but actually misleading.","Looks convincing, but is false.","The author rejects the specious claim that wealth guarantees happiness.","भ्रामक · कपटपूर्ण","Misleading, deceptive, fallacious","Genuine, valid"],
+["Tenuous","/ˈtenjuəs/ · adjective","Very weak, slight or uncertain.","A thin thread of evidence.","The connection between the two events is tenuous.","कमज़ोर · अस्पष्ट","Weak, flimsy, slight","Strong, substantial"],
+["Vehement","/ˈviːəmənt/ · adjective","Showing strong feeling or forceful conviction.","An argument delivered with intensity.","The proposal faced vehement opposition.","प्रबल · तीव्र","Fervent, forceful, intense","Mild, subdued"],
+["Wary","/ˈweəri/ · adjective","Cautious because of possible danger or problems.","Watchful and careful.","Readers should be wary of unsupported generalisations.","सतर्क · सावधान","Cautious, vigilant, guarded","Careless, unwary"],
+["Austere","/ɒˈstɪə/ · adjective","Severe, plain or without luxury.","Simple and stripped of excess.","The building's austere design reflects the architect's philosophy.","सादा · सादगीपूर्ण","Severe, plain, restrained","Luxurious, ornate"],
+["Deference","/ˈdefərəns/ · noun","Respectful submission to another person's judgement or authority.","Showing respect to someone else's position.","The junior researcher spoke with deference to her mentor.","आदर · सम्मान","Respect, regard, reverence","Disrespect, defiance"],
+["Disparity","/dɪˈspærəti/ · noun","A great difference or inequality.","A gap between two things.","The report highlights the disparity in educational access.","असमानता · अंतर","Inequality, difference, imbalance","Parity, equality"],
+["Enigmatic","/ˌenɪɡˈmætɪk/ · adjective","Mysterious and difficult to interpret.","Like a riddle.","The author's enigmatic conclusion leaves several questions unanswered.","रहस्यमय · पहेलीपूर्ण","Mysterious, puzzling, cryptic","Clear, transparent"],
+["Futile","/ˈfjuːtaɪl/ · adjective","Having no useful result; pointless.","Effort without outcome.","The author argues that censorship is futile in the digital age.","व्यर्थ · निष्फल","Pointless, fruitless, useless","Effective, productive"],
+["Impetus","/ˈɪmpɪtəs/ · noun","A force or stimulus that makes something happen.","The push that starts movement.","The crisis provided the impetus for institutional reform.","प्रेरणा · प्रोत्साहन","Stimulus, motivation, catalyst","Deterrent, hindrance"],
+["Onerous","/ˈəʊnərəs/ · adjective","Involving a great deal of effort or difficulty.","A heavy burden.","The new regulations placed an onerous burden on small businesses.","कठिन · बोझिल","Burdensome, demanding, taxing","Easy, effortless"],
+["Recalcitrant","/rɪˈkælsɪtrənt/ · adjective","Resistant to authority or control; stubbornly uncooperative.","Refusing to follow instructions.","The recalcitrant group refused to accept the proposed settlement.","अवज्ञाकारी · विद्रोही","Defiant, stubborn, obstinate","Compliant, obedient"],
+["Sanguine","/ˈsæŋɡwɪn/ · adjective","Optimistic or positive, especially in a difficult situation.","A hopeful outlook.","Despite the setbacks, the team remained sanguine about the future.","आशावादी · सकारात्मक","Optimistic, hopeful, confident","Pessimistic, gloomy"],
+["Trivial","/ˈtrɪviəl/ · adjective","Of little importance or value.","A small matter.","The author argues that the distinction is not trivial.","तुच्छ · मामूली","Insignificant, minor, negligible","Significant, substantial"],
+["Vindicate","/ˈvɪndɪkeɪt/ · verb","To clear someone of blame or prove that they were right.","Show that someone was justified.","The final results vindicated the researcher's original hypothesis.","सही साबित करना · दोषमुक्त करना","Justify, exonerate, validate","Discredit, incriminate"],
+["Whimsical","/ˈwɪmzɪkəl/ · adjective","Playfully unusual or fanciful.","A playful imagination.","The author uses whimsical imagery to soften a serious argument.","कल्पनाशील · मनमौजी","Fanciful, playful, quirky","Practical, conventional"],
+["Zealous","/ˈzeləs/ · adjective","Showing great energy and enthusiasm for a cause.","Passionate commitment.","The zealous campaigners worked tirelessly for reform.","उत्साही · जोशीला","Passionate, fervent, devoted","Indifferent, apathetic"]
 ];
 
-
 /* VOCABULARY NAVIGATION */
+let currentWord=0;
 
-let currentWord = 0;
+function showWord(index){
+  if(index<0||index>=words.length)return;
+  currentWord=index;
+  const w=words[index];
 
-function showWord(index) {
-  if (index < 0 || index >= words.length) return;
+  document.getElementById("word").textContent=(index+1)+" – "+w[0];
+  document.getElementById("wordMeta").textContent=w[1];
+  document.getElementById("meaning").textContent=w[2];
 
-  currentWord = index;
-  const w = words[index];
+  const fields=[
+    ["mnemonic","Memory: ",w[3]],
+    ["example","Example: ",w[4]],
+    ["hindi","",w[5]],
+    ["synonyms","Similar: ",w[6]],
+    ["antonyms","Opposite: ",w[7]]
+  ];
 
-  document.getElementById("word").textContent =
-    (index + 1) + " – " + w[0];
+  fields.forEach(([id,label,value])=>{
+    const el=document.getElementById(id);
+    el.replaceChildren();
+    if(label){
+      const b=document.createElement("b");
+      b.textContent=label;
+      el.append(b);
+    }
+    el.append(document.createTextNode(value||""));
+  });
 
-  document.getElementById("wordMeta").textContent = w[1];
-  document.getElementById("meaning").textContent = w[2];
-
-  const mnemonic = document.getElementById("mnemonic");
-  mnemonic.replaceChildren();
-  const mLabel = document.createElement("b");
-  mLabel.textContent = "Memory: ";
-  mnemonic.append(mLabel, document.createTextNode(w[3]));
-
-  const example = document.getElementById("example");
-  example.replaceChildren();
-  const eLabel = document.createElement("b");
-  eLabel.textContent = "Example: ";
-  example.append(eLabel, document.createTextNode(w[4]));
-
-  const hindi = document.getElementById("hindi");
-  hindi.replaceChildren();
-  const hLabel = document.createElement("b");
-  hLabel.textContent = "Hindi: ";
-  hindi.append(hLabel, document.createTextNode(w[5]));
-
-  document.getElementById("totalWords").textContent =
-    "/ " + words.length;
-
-  document.getElementById("jump").value = index + 1;
+  document.getElementById("totalWords").textContent="/ "+words.length;
+  document.getElementById("jump").value=index+1;
 }
 
-document.getElementById("previous").addEventListener("click", () => {
-  showWord((currentWord - 1 + words.length) % words.length);
+document.getElementById("previous").addEventListener("click",()=>{
+  showWord((currentWord-1+words.length)%words.length);
 });
-
-document.getElementById("next").addEventListener("click", () => {
-  showWord((currentWord + 1) % words.length);
+document.getElementById("next").addEventListener("click",()=>{
+  showWord((currentWord+1)%words.length);
 });
-
-document.getElementById("jump").addEventListener("change", e => {
-  const number = Number(e.target.value);
-
-  if (Number.isInteger(number) && number >= 1 && number <= words.length) {
-    showWord(number - 1);
-  } else {
-    e.target.value = currentWord + 1;
-  }
+document.getElementById("jump").addEventListener("change",e=>{
+  const n=Number(e.target.value);
+  if(Number.isInteger(n)&&n>=1&&n<=words.length)showWord(n-1);
+  else e.target.value=currentWord+1;
 });
-
 showWord(0);
 
-
 /* COUNTRY FACTS — REFRESH EVERY MINUTE */
-
-const places = [
+const places=[
   ["Japan","Tokyo","Japan has more than 14,000 islands."],
   ["Iceland","Reykjavik","Iceland has no native mosquitoes."],
   ["Bhutan","Thimphu","Bhutan measures progress with Gross National Happiness."],
@@ -729,26 +568,21 @@ const places = [
   ["Mexico","Mexico City","Mexico City was built on an ancient lake."]
 ];
 
-let lastPlace = -1;
+let lastPlace=-1;
 
-function changeCountry() {
+function changeCountry(){
   let next;
+  do{
+    next=Math.floor(Math.random()*places.length);
+  }while(next===lastPlace);
 
-  do {
-    next = Math.floor(Math.random() * places.length);
-  } while (next === lastPlace);
-
-  lastPlace = next;
-
-  const [country, capital, fact] = places[next];
-
-  document.getElementById("country").textContent =
-    country + " · " + capital + " — " + fact;
+  lastPlace=next;
+  const [country,capital,fact]=places[next];
+  document.getElementById("country").textContent=
+    country+" · "+capital+" — "+fact;
 }
-
 changeCountry();
-setInterval(changeCountry, 60 * 1000);
-
+setInterval(changeCountry,60000);
 </script>
 </body>
 </html>
